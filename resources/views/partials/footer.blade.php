@@ -89,7 +89,6 @@
     .social-icon.youtube:hover { background: #ff0000; }
     .social-icon.tiktok:hover { background: #000000; border-color: #25f4ee; box-shadow: 2px 2px 0 #fe2c55; }
     .social-icon.whatsapp:hover { background: #25d366; }
-    .social-icon.telegram:hover { background: #0088cc; }
     .social-icon.phone:hover { background: #3a95cc; }
 
     .footer-brand-card {
@@ -149,25 +148,22 @@
 
                 <h5 class="footer-title">تابعونا على</h5>
                 <div class="footer-social">
-                    <a href="https://www.facebook.com/share/1AwWaPt4N5/?mibextid=wwXIfr" target="_blank" rel="noopener" class="social-icon facebook" aria-label="Facebook" title="Facebook">
+                    <a href="https://share.google/SdSzquhRAD7qeHS8N" target="_blank" rel="noopener" class="social-icon facebook" aria-label="Facebook" title="Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="https://www.instagram.com/nourelbokhary" target="_blank" rel="noopener" class="social-icon instagram" aria-label="Instagram" title="Instagram">
+                    <a href="https://www.instagram.com/nourelbukhari?igsh=YWdkcGs5ZHM5ZGxs" target="_blank" rel="noopener" class="social-icon instagram" aria-label="Instagram" title="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://www.youtube.com/@NourElBokhary" target="_blank" rel="noopener" class="social-icon youtube" aria-label="YouTube" title="YouTube">
+                    <a href="https://youtube.com/@nourelbukhari?si=mI6WDNPsD9yigjpJ" target="_blank" rel="noopener" class="social-icon youtube" aria-label="YouTube" title="YouTube">
                         <i class="fab fa-youtube"></i>
                     </a>
-                    <a href="https://www.tiktok.com/@nourelbokhary" target="_blank" rel="noopener" class="social-icon tiktok" aria-label="TikTok" title="TikTok">
+                    <a href="https://www.tiktok.com/@nooralbukhari8?_r=1&_t=ZS-98FJwD5HKyL" target="_blank" rel="noopener" class="social-icon tiktok" aria-label="TikTok" title="TikTok">
                         <i class="fab fa-tiktok"></i>
                     </a>
-                    <a href="https://wa.me/201151580439" target="_blank" rel="noopener" class="social-icon whatsapp" aria-label="WhatsApp" title="WhatsApp">
+                    <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="social-icon whatsapp" aria-label="WhatsApp" title="WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                     </a>
-                    <a href="https://t.me/nourelbokhary" target="_blank" rel="noopener" class="social-icon telegram" aria-label="Telegram" title="Telegram">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="tel:+201151580439" class="social-icon phone" aria-label="اتصل بنا" title="اتصل بنا">
+                    <a href="tel:+201055201766" class="social-icon phone" aria-label="اتصل بنا" title="اتصل بنا">
                         <i class="fas fa-phone-alt"></i>
                     </a>
                 </div>
@@ -201,7 +197,7 @@
                     </li>
                     <li>
                         <i class="fas fa-phone-alt"></i>
-                        <a href="tel:+201151580439" dir="ltr" class="text-white-50 text-decoration-none">+201151580439</a>
+                        <a href="tel:+201055201766" dir="ltr" class="text-white-50 text-decoration-none">+201055201766</a>
                     </li>
                     <li>
                         <i class="fas fa-envelope"></i>

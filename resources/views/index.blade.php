@@ -536,15 +536,6 @@
         .floating-btn.donate:hover { background: var(--primary-dark); }
         .floating-btn.whatsapp { background: #25d366; }
         .floating-btn.whatsapp:hover { background: #128c7e; }
-        .floating-btn .pulse-ring {
-            position: absolute; inset: -3px;
-            border-radius: 50%; border: 3px solid currentColor;
-            opacity: 0.7; animation: pulseRing 1.8s ease-out infinite;
-        }
-        @keyframes pulseRing {
-            0% { transform: scale(1); opacity: 0.6; }
-            100% { transform: scale(1.5); opacity: 0; }
-        }
         .floating-btn .label {
             position: absolute; right: 75px;
             background: var(--slate-900); color: var(--white);
@@ -553,6 +544,13 @@
             opacity: 0; pointer-events: none; transition: opacity 0.2s;
         }
         .floating-btn:hover .label { opacity: 1; }
+        .floating-btn.donate .donate-text {
+            font-size: 1.15rem; font-weight: 900; line-height: 1;
+            white-space: nowrap;
+        }
+        @media (max-width: 768px) {
+            .floating-btn.donate .donate-text { font-size: 1rem; }
+        }
 
         /* ===== Toast (replaces ugly alert) ===== */
         .copy-toast {
@@ -780,11 +778,129 @@
         .pay-note { padding: 1rem 1.1rem; }
     }
     
+    /* ===== زرار التطوع في الناف بار ===== */
+    .nav-cta-volunteer {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: var(--white); color: var(--primary);
+        border: 1.5px solid var(--primary);
+        font-weight: 800; transition: all 0.25s ease;
+    }
+    .nav-cta-volunteer:hover { background: var(--primary); color: var(--white); transform: translateY(-2px); }
+
+    @media (max-width: 991.98px) {
+        .navbar-collapse .nav-cta-group {
+            flex-direction: column; align-items: stretch !important; width: 100%;
+        }
+        .navbar-collapse .nav-cta-group .btn { justify-content: center; width: 100%; }
+    }
+
+    /* زرارين تبرع/تطوع مصغّرين — يظهروا في الناف بار جنب اللوجو على الموبايل */
+    .nav-cta-sm {
+        padding: 0.5rem 0.9rem !important;
+        font-size: 0.78rem !important;
+        gap: 0.35rem !important;
+        white-space: nowrap;
+    }
+    .nav-cta-sm i { font-size: 0.85em; }
+    .nav-cta-mobile .nav-cta-donate,
+    .nav-cta-mobile .nav-cta-volunteer {
+        font-size: 0.78rem !important;
+        padding: 0.5rem 0.9rem !important;
+    }
+    @media (max-width: 380px) {
+        .nav-cta-sm { padding: 0.5rem 0.65rem !important; font-size: 0; }
+        .nav-cta-sm i { font-size: 0.95rem; }
+    }
+
+    /* ===== مودال التطوع ===== */
+    .volunteer-modal-content { border-radius: 1.5rem; border: none; }
+    .volunteer-btn {
+        display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+        padding: 1rem; border-radius: 1rem; font-weight: 900; font-size: 1.05rem;
+        color: #fff; text-decoration: none; transition: all 0.25s ease;
+    }
+    .volunteer-btn:hover { transform: translateY(-3px); color: #fff; }
+    .volunteer-girls { background: linear-gradient(135deg, #ec4899, #db2777); }
+    .volunteer-boys { background: linear-gradient(135deg, #3a95cc, #1d4ed8); }
+
+    /* ===== شارة الإشهار بوزارة التضامن ===== */
+    .ministry-badge {
+        display: inline-flex; align-items: center; gap: 0.35rem;
+        font-size: 0.68rem; font-weight: 800; color: var(--primary-deeper);
+        background: var(--primary-tint); padding: 0.25rem 0.7rem; border-radius: 100px;
+        margin-top: 0.3rem; white-space: nowrap;
+    }
+
+    /* ===== تبويبات داخل مصر / خارج مصر + وسائل التبرع ===== */
+    .donate-scope-tabs, .donate-method-tabs {
+        list-style: none; padding: 0; margin: 0 0 2rem; gap: 0.6rem; flex-wrap: wrap;
+    }
+    .donate-scope-tabs .nav-link,
+    .donate-method-tabs .nav-link {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        padding: 0.7rem 1.4rem; border-radius: 100px;
+        font-weight: 800; font-size: 0.95rem;
+        background: var(--white); color: var(--slate-700);
+        border: 1.5px solid var(--slate-200);
+        transition: all 0.25s ease; cursor: pointer;
+    }
+    .donate-method-tabs .nav-link { background: var(--primary-tint); }
+    .donate-scope-tabs .nav-link:hover,
+    .donate-method-tabs .nav-link:hover { color: var(--primary); border-color: var(--primary); }
+    .donate-scope-tabs .nav-link.active,
+    .donate-method-tabs .nav-link.active {
+        background: var(--primary); color: var(--white); border-color: var(--primary);
+        box-shadow: 0 10px 20px -6px rgba(58, 149, 204, 0.45);
+    }
+
+    /* ===== تبرع من خلال مندوب ===== */
+    .agent-donate-grid {
+        max-width: 800px; margin: 0 auto;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    .agent-donate-card {
+        background: var(--white); border: 1px solid #eef1f7; border-radius: 1.25rem;
+        padding: 2rem 1.5rem; text-align: center;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+        transition: all 0.3s ease;
+    }
+    .agent-donate-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px -16px rgba(15,23,42,0.18); }
+    .agent-donate-icon {
+        width: 64px; height: 64px; margin: 0 auto 1.1rem;
+        background: var(--primary-tint); color: var(--primary);
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        font-size: 1.6rem;
+    }
+    .agent-donate-card h5 { font-weight: 900; margin-bottom: 0.6rem; }
+    .agent-donate-card p { color: var(--slate-700); opacity: 0.7; font-size: 0.92rem; margin-bottom: 1.4rem; }
+
+    /* ===== خارج مصر ===== */
+    .outside-egypt-note {
+        max-width: 620px; background: var(--white); border-radius: 1.25rem;
+        padding: 2.5rem 2rem; box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+    }
+    .outside-egypt-note .pay-note-icon {
+        width: 64px; height: 64px; font-size: 1.6rem;
+        background: var(--primary-tint); color: var(--primary);
+    }
+
+    @media (max-width: 576px) {
+        .agent-donate-grid { grid-template-columns: 1fr; }
+        .donate-scope-tabs .nav-link, .donate-method-tabs .nav-link { font-size: 0.85rem; padding: 0.6rem 1.1rem; }
+    }
+
     /* ===== تكبير + هايلايت زرار التبرع ===== */
+    .nav-cta-donate {
+        font-size: 1.05rem !important;
+        padding: 0.9rem 1.9rem !important;
+        animation: donateGlow 2s ease-in-out infinite;
+    }
+
 .floating-btn.donate {
-    width: 82px;
-    height: 82px;
-    font-size: 2.1rem;
+    width: auto;
+    height: auto;
+    padding: 1.1rem 1.9rem;
+    border-radius: 100px;
     background: var(--primary);
     /* توهّج/هايلايت حوالين الزرار */
     box-shadow:
@@ -815,33 +931,7 @@
 /* على الموبايل نخليه أصغر شوية */
 @media (max-width: 768px) {
     .floating-btn.donate {
-        width: 70px;
-        height: 70px;
-        font-size: 1.8rem;
-    }
-}
-
-
-.floating-btn.donate {
-    width: auto;
-    height: auto;
-    padding: 0.9rem 1.6rem;
-    border-radius: 100px;          /* بيضاوي بدل الدائري */
-    font-size: 1.05rem;
-    font-weight: 900;
-    line-height: 1;
-    white-space: nowrap;
-}
-
-.floating-btn.donate .donate-text {
-    position: relative;
-    z-index: 2;
-}
-
-@media (max-width: 768px) {
-    .floating-btn.donate {
-        padding: 0.75rem 1.3rem;
-        font-size: 0.95rem;
+        padding: 0.9rem 1.5rem;
     }
 }
 </style>
@@ -868,10 +958,10 @@
             </div>
             <div class="d-flex gap-2 align-items-center">
                 <span class="me-2 fw-bold">تابعونا:</span>
-                <a href="https://www.facebook.com/Noor.Albokhary?mibextid=wwXIfr&mibextid=wwXIfr" target="_blank" rel="noopener" class="social-mini" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/nourelbukhari?igsh=MTJsZm10ZDZ4Mmhsdw%3D%3D&utm_source=qr" target="_blank" rel="noopener" class="social-mini" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com/@NourElBokhary" target="_blank" rel="noopener" class="social-mini" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.tiktok.com/@nourelbokhary" target="_blank" rel="noopener" class="social-mini" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://share.google/SdSzquhRAD7qeHS8N" target="_blank" rel="noopener" class="social-mini" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/nourelbukhari?igsh=YWdkcGs5ZHM5ZGxs" target="_blank" rel="noopener" class="social-mini" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/@nourelbukhari?si=mI6WDNPsD9yigjpJ" target="_blank" rel="noopener" class="social-mini" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@nooralbukhari8?_r=1&_t=ZS-98FJwD5HKyL" target="_blank" rel="noopener" class="social-mini" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                 <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="social-mini" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
@@ -883,11 +973,22 @@
     <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-3" href="/">
             <img src="{{ asset('logo.jpg-large-preserve-ratio') }}" alt="مؤسسة نور البخاري">
-            <div class="d-none d-sm-block">
+            <div class="d-none d-md-block">
                 <h4 class="mb-0 text-primary-deeper">مؤسسة نور البخاري</h4>
-                <small class="text-muted fw-bold">الخير لا يعرف حدود</small>
+                <small class="text-muted fw-bold d-block">الخير لا يعرف حدود</small>
+                <span class="ministry-badge"><i class="fas fa-shield-halved"></i> مشهرة برقم 12683 بوزارة التضامن الاجتماعي</span>
             </div>
         </a>
+        <div class="d-flex d-lg-none align-items-center gap-2 nav-cta-group nav-cta-mobile">
+            <button type="button" class="btn nav-cta-volunteer nav-cta-sm" data-bs-toggle="modal" data-bs-target="#volunteerModal">
+                <i class="fas fa-people-group"></i>
+                تطوع
+            </button>
+            <a href="#donations" class="btn btn-luxury nav-cta-donate nav-cta-sm">
+                <i class="fas fa-hand-holding-heart"></i>
+                تبرع الآن
+            </a>
+        </div>
         <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
             <span class="fas fa-bars fa-lg text-primary"></span>
         </button>
@@ -899,8 +1000,12 @@
                 <li class="nav-item"><a class="nav-link" href="#donations">طرق التبرع</a></li>
                 <li class="nav-item"><a class="nav-link" href="#transparency">الشفافية</a></li>
             </ul>
-            <div class="d-flex align-items-center gap-2">
-                <a href="#donations" class="btn btn-luxury px-4 py-2 fs-6">
+            <div class="d-none d-lg-flex align-items-center gap-2 nav-cta-group">
+                <button type="button" class="btn nav-cta-volunteer px-3 py-2 fs-6" data-bs-toggle="modal" data-bs-target="#volunteerModal">
+                    <i class="fas fa-people-group"></i>
+                    تطوع
+                </button>
+                <a href="#donations" class="btn btn-luxury nav-cta-donate px-4 py-2 fs-6">
                     <i class="fas fa-hand-holding-heart"></i>
                     تبرع الآن
                 </a>
@@ -1147,118 +1252,208 @@
             <p class="donate-head-sub">اختر وسيلة الدفع المناسبة لإتمام التبرع بسهولة وأمان</p>
         </div>
 
-        {{-- Payment list --}}
-        <div class="pay-list mx-auto">
+        {{-- داخل / خارج مصر --}}
+        <ul class="nav donate-scope-tabs justify-content-center" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#scope-inside" type="button" role="tab">
+                    <i class="fas fa-flag"></i> داخل مصر
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#scope-outside" type="button" role="tab">
+                    <i class="fas fa-earth-africa"></i> خارج مصر
+                </button>
+            </li>
+        </ul>
 
-            {{-- InstaPay — Account 1 --}}
-            <div class="pay-row brand-instapay">
-                <div class="pay-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/InstaPay_Logo.png" alt="InstaPay">
-                </div>
-                <div class="pay-info">
-                    <span class="pay-badge">حساب InstaPay</span>
-                    <div class="pay-id">noor...albokhre@instapay</div>
-                    <p class="pay-desc">انسخ المعرف واستخدمه في تطبيق InstaPay</p>
-                </div>
-                <div class="pay-actions">
-                    <button type="button" class="pay-btn pay-btn-copy"
-                            onclick="copyId('noor...albokhre@instapay', this)">
-                        نسخ <i class="far fa-copy"></i>
-                    </button>
-                    <a href="https://ipn.eg/S/noor...albokhre/instapay/9P4iwx"
-                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
-                        تحويل الآن <i class="fas fa-arrow-left"></i>
-                    </a>
+        <div class="tab-content">
+
+            {{-- ===== داخل مصر ===== --}}
+            <div class="tab-pane fade show active" id="scope-inside" role="tabpanel">
+
+                {{-- وسيلة التبرع --}}
+                <ul class="nav donate-method-tabs justify-content-center" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#method-instapay" type="button" role="tab">
+                            <i class="fas fa-mobile-screen-button"></i> انستا
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#method-wallet" type="button" role="tab">
+                            <i class="fas fa-wallet"></i> محفظة إلكترونية
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#method-agent" type="button" role="tab">
+                            <i class="fas fa-handshake-angle"></i> تبرع من خلال مندوب
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+
+                    {{-- 1) انستا --}}
+                    <div class="tab-pane fade show active" id="method-instapay" role="tabpanel">
+                        <div class="pay-list mx-auto">
+
+                            {{-- InstaPay — Account 1 --}}
+                            <div class="pay-row brand-instapay">
+                                <div class="pay-logo">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/InstaPay_Logo.png" alt="InstaPay">
+                                </div>
+                                <div class="pay-info">
+                                    <span class="pay-badge">حساب InstaPay</span>
+                                    <div class="pay-id">noor...albokhre@instapay</div>
+                                    <p class="pay-desc">انسخ المعرف واستخدمه في تطبيق InstaPay</p>
+                                </div>
+                                <div class="pay-actions">
+                                    <button type="button" class="pay-btn pay-btn-copy"
+                                            onclick="copyId('noor...albokhre@instapay', this)">
+                                        نسخ <i class="far fa-copy"></i>
+                                    </button>
+                                    <a href="https://ipn.eg/S/noor...albokhre/instapay/9P4iwx"
+                                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
+                                        تحويل الآن <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            {{-- InstaPay — Account 2 --}}
+                            <div class="pay-row brand-instapay">
+                                <div class="pay-logo">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/InstaPay_Logo.png" alt="InstaPay">
+                                </div>
+                                <div class="pay-info">
+                                    <span class="pay-badge">حساب InstaPay</span>
+                                    <div class="pay-id">husseinabdellatif.eg@instapay</div>
+                                    <p class="pay-desc">انسخ المعرف واستخدمه في تطبيق InstaPay</p>
+                                </div>
+                                <div class="pay-actions">
+                                    <button type="button" class="pay-btn pay-btn-copy"
+                                            onclick="copyId('husseinabdellatif.eg@instapay', this)">
+                                        نسخ <i class="far fa-copy"></i>
+                                    </button>
+                                    <a href="https://ipn.eg/S/husseinabdellatif.eg/instapay/4SGbFV"
+                                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
+                                        تحويل الآن <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {{-- 2) محفظة إلكترونية --}}
+                    <div class="tab-pane fade" id="method-wallet" role="tabpanel">
+                        <div class="pay-list mx-auto">
+
+                            {{-- Vodafone Cash — Account 1 --}}
+                            <div class="pay-row brand-vodafone">
+                                <div class="pay-logo">
+                                    <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
+                                    <span class="pay-logo-label">فودافون كاش</span>
+                                </div>
+                                <div class="pay-info">
+                                    <span class="pay-badge">Vodafone Cash — الحساب الأول</span>
+                                    <div class="pay-id">01062720072</div>
+                                    <p class="pay-desc">انسخ الرقم واستخدمه في تطبيق فودافون كاش</p>
+                                </div>
+                                <div class="pay-actions">
+                                    <button type="button" class="pay-btn pay-btn-copy"
+                                            onclick="copyId('01062720072', this)">
+                                        نسخ الرقم <i class="far fa-copy"></i>
+                                    </button>
+                                    <a href="https://vf.eg/vfcash?id=mt&qrId=Z3zC5u"
+                                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
+                                        تحويل الآن <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            {{-- Vodafone Cash — Account 2 --}}
+                            <div class="pay-row brand-vodafone">
+                                <div class="pay-logo">
+                                    <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
+                                    <span class="pay-logo-label">فودافون كاش</span>
+                                </div>
+                                <div class="pay-info">
+                                    <span class="pay-badge">Vodafone Cash — الحساب الثاني</span>
+                                    <div class="pay-id">01055201766</div>
+                                    <p class="pay-desc">انسخ الرقم واستخدمه في تطبيق فودافون كاش</p>
+                                </div>
+                                <div class="pay-actions">
+                                    <button type="button" class="pay-btn pay-btn-copy"
+                                            onclick="copyId('01055201766', this)">
+                                        نسخ الرقم <i class="far fa-copy"></i>
+                                    </button>
+                                    <a href="https://vf.eg/vfcash?id=mt&qrId=76r1GS"
+                                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
+                                        تحويل الآن <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            {{-- Etisalat Cash --}}
+                            <div class="pay-row brand-etisalat">
+                                <div class="pay-logo">
+                                    <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
+                                    <span class="pay-logo-label">اتصالات كاش</span>
+                                </div>
+                                <div class="pay-info">
+                                    <span class="pay-badge">Etisalat Cash</span>
+                                    <div class="pay-id">01151580439</div>
+                                    <p class="pay-desc">انسخ الرقم واستخدمه في تطبيق اتصالات كاش</p>
+                                </div>
+                                <div class="pay-actions">
+                                    <button type="button" class="pay-btn pay-btn-copy"
+                                            onclick="copyId('01151580439', this)">
+                                        نسخ الرقم <i class="far fa-copy"></i>
+                                    </button>
+                                    <a href="https://app.etisalat.eg/?appScreens=cash&appScreen=cash&extra=screenId:send_money;dial:01151580439"
+                                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
+                                        تحويل الآن <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {{-- 3) تبرع من خلال مندوب: عيني / مالي --}}
+                    <div class="tab-pane fade" id="method-agent" role="tabpanel">
+                        <div class="agent-donate-grid">
+                            <div class="agent-donate-card">
+                                <div class="agent-donate-icon"><i class="fas fa-box-open"></i></div>
+                                <h5>تبرع عيني</h5>
+                                <p>ملابس، بطاطين، مواد غذائية أو أي مستلزمات عينية — يقوم مندوبنا باستلامها منك مباشرة في الموعد المناسب لك.</p>
+                                <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="btn btn-luxury w-100">
+                                    <i class="fab fa-whatsapp"></i> تنسيق الاستلام عبر واتساب
+                                </a>
+                            </div>
+                            <div class="agent-donate-card">
+                                <div class="agent-donate-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+                                <h5>تبرع مالي</h5>
+                                <p>تسليم مبلغ التبرع نقداً في يدك — يصل إليك مندوب مؤسسة نور البخاري بموعد يناسبك.</p>
+                                <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="btn btn-luxury w-100">
+                                    <i class="fab fa-whatsapp"></i> طلب زيارة مندوب
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            {{-- InstaPay — Account 2 --}}
-            <div class="pay-row brand-instapay">
-                <div class="pay-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/InstaPay_Logo.png" alt="InstaPay">
-                </div>
-                <div class="pay-info">
-                    <span class="pay-badge">حساب InstaPay</span>
-                    <div class="pay-id">husseinabdellatif.eg@instapay</div>
-                    <p class="pay-desc">انسخ المعرف واستخدمه في تطبيق InstaPay</p>
-                </div>
-                <div class="pay-actions">
-                    <button type="button" class="pay-btn pay-btn-copy"
-                            onclick="copyId('husseinabdellatif.eg@instapay', this)">
-                        نسخ <i class="far fa-copy"></i>
-                    </button>
-                    <a href="https://ipn.eg/S/husseinabdellatif.eg/instapay/4SGbFV"
-                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
-                        تحويل الآن <i class="fas fa-arrow-left"></i>
-                    </a>
-                </div>
-            </div>
-
-            {{-- Vodafone Cash — Account 1 --}}
-            <div class="pay-row brand-vodafone">
-                <div class="pay-logo">
-                    <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
-                    <span class="pay-logo-label">فودافون كاش</span>
-                </div>
-                <div class="pay-info">
-                    <span class="pay-badge">Vodafone Cash — الحساب الأول</span>
-                    <div class="pay-id">01062720072</div>
-                    <p class="pay-desc">انسخ الرقم واستخدمه في تطبيق فودافون كاش</p>
-                </div>
-                <div class="pay-actions">
-                    <button type="button" class="pay-btn pay-btn-copy"
-                            onclick="copyId('01062720072', this)">
-                        نسخ الرقم <i class="far fa-copy"></i>
-                    </button>
-                    <a href="https://vf.eg/vfcash?id=mt&qrId=Z3zC5u"
-                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
-                        تحويل الآن <i class="fas fa-arrow-left"></i>
-                    </a>
-                </div>
-            </div>
-
-            {{-- Vodafone Cash — Account 2 --}}
-            <div class="pay-row brand-vodafone">
-                <div class="pay-logo">
-                    <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
-                    <span class="pay-logo-label">فودافون كاش</span>
-                </div>
-                <div class="pay-info">
-                    <span class="pay-badge">Vodafone Cash — الحساب الثاني</span>
-                    <div class="pay-id">01055201766</div>
-                    <p class="pay-desc">انسخ الرقم واستخدمه في تطبيق فودافون كاش</p>
-                </div>
-                <div class="pay-actions">
-                    <button type="button" class="pay-btn pay-btn-copy"
-                            onclick="copyId('01055201766', this)">
-                        نسخ الرقم <i class="far fa-copy"></i>
-                    </button>
-                    <a href="https://vf.eg/vfcash?id=mt&qrId=76r1GS"
-                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
-                        تحويل الآن <i class="fas fa-arrow-left"></i>
-                    </a>
-                </div>
-            </div>
-
-            {{-- Etisalat Cash --}}
-            <div class="pay-row brand-etisalat">
-                <div class="pay-logo">
-                    <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
-                    <span class="pay-logo-label">اتصالات كاش</span>
-                </div>
-                <div class="pay-info">
-                    <span class="pay-badge">Etisalat Cash</span>
-                    <div class="pay-id">01151580439</div>
-                    <p class="pay-desc">انسخ الرقم واستخدمه في تطبيق اتصالات كاش</p>
-                </div>
-                <div class="pay-actions">
-                    <button type="button" class="pay-btn pay-btn-copy"
-                            onclick="copyId('01151580439', this)">
-                        نسخ الرقم <i class="far fa-copy"></i>
-                    </button>
-                    <a href="https://app.etisalat.eg/?appScreens=cash&appScreen=cash&extra=screenId:send_money;dial:01151580439"
-                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
-                        تحويل الآن <i class="fas fa-arrow-left"></i>
+            {{-- ===== خارج مصر ===== --}}
+            <div class="tab-pane fade" id="scope-outside" role="tabpanel">
+                <div class="outside-egypt-note mx-auto text-center">
+                    <div class="pay-note-icon mx-auto mb-3">
+                        <i class="fas fa-earth-africa"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">قريباً بإذن الله</h5>
+                    <p class="text-muted mb-4">نعمل حالياً على تجهيز وسائل تبرع مخصصة للمتبرعين من خارج مصر. لحين إتاحتها، يمكنكم التواصل معنا مباشرة وسنساعدكم في إتمام تبرعكم.</p>
+                    <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="btn btn-luxury">
+                        <i class="fab fa-whatsapp"></i> تواصل معنا عبر واتساب
                     </a>
                 </div>
             </div>
@@ -1395,9 +1590,8 @@
 <!-- ===== Sticky Floating Buttons ===== -->
 <div class="floating-actions">
     <a href="#donations" class="floating-btn donate" aria-label="تبرع الآن">
-    <span class="donate-text">تبرع الآن</span>
-    <span class="pulse-ring"></span>
-</a>
+        <span class="donate-text">تبرع الآن</span>
+    </a>
     <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="floating-btn whatsapp" aria-label="واتساب">
         <i class="fab fa-whatsapp"></i>
         <span class="label">تواصل واتساب</span>
@@ -1408,6 +1602,39 @@
 <div id="copyToast" class="copy-toast">
     <i class="fas fa-circle-check"></i>
     <span id="toastMsg">تم النسخ بنجاح</span>
+</div>
+
+{{--
+    TODO: استبدل الرابطين دول بلينك جروب الواتساب الفعلي لكل قسم أول ما الجروبات تتعمل.
+--}}
+@php
+    $volunteerGirlsLink = '#';
+    $volunteerBoysLink = '#';
+@endphp
+
+<!-- ===== Volunteer Modal ===== -->
+<div class="modal fade" id="volunteerModal" tabindex="-1" aria-labelledby="volunteerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content volunteer-modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold" id="volunteerModalLabel">
+                    <i class="fas fa-people-group text-primary me-2"></i> انضم لفريق التطوع
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+            </div>
+            <div class="modal-body text-center pb-4">
+                <p class="text-muted mb-4">اختر القسم المناسب لينضم لجروب الواتساب الخاص بالتطوع</p>
+                <div class="d-flex flex-column gap-3">
+                    <a href="{{ $volunteerGirlsLink }}" target="_blank" rel="noopener" class="volunteer-btn volunteer-girls">
+                        <i class="fas fa-person-dress"></i> قسم البنات
+                    </a>
+                    <a href="{{ $volunteerBoysLink }}" target="_blank" rel="noopener" class="volunteer-btn volunteer-boys">
+                        <i class="fas fa-person"></i> قسم الرجال
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @include('partials.footer')
