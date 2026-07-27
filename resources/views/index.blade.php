@@ -846,10 +846,10 @@
     }
     .donate-method-tabs .nav-link { background: var(--primary-tint); }
     .donate-scope-tabs .nav-link:hover,
-    .donate-method-tabs .nav-link:hover { color: var(--primary); border-color: var(--primary); }
+    .donate-method-tabs .nav-link:hover { color: var(--primary) !important; border-color: var(--primary); }
     .donate-scope-tabs .nav-link.active,
     .donate-method-tabs .nav-link.active {
-        background: var(--primary); color: var(--white); border-color: var(--primary);
+        background: var(--primary); color: var(--white) !important; border-color: var(--primary);
         box-shadow: 0 10px 20px -6px rgba(58, 149, 204, 0.45);
     }
 
