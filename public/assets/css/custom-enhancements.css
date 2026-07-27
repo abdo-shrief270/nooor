@@ -1,0 +1,486 @@
+/* ===================================
+   Spetalia Medical Center - Enhanced Styles
+   =================================== */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap');
+
+:root {
+    --brand-primary: #1e88e5;
+    --brand-secondary: #42a5f5;
+    --brand-dark: #1565c0;
+    --brand-gradient: linear-gradient(135deg, #1e88e5 0%, #42a5f5 100%);
+    --text-dark: #1a2332;
+    --text-light: #5a6c7d;
+    --bg-light: #f8f9fa;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+    --shadow-xl: 0 12px 40px rgba(0,0,0,0.15);
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+* {
+    font-family: 'Cairo', sans-serif;
+}
+
+/* ===================================
+   Logo Text Styling
+   =================================== */
+.text-logo {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -1px;
+    display: inline-block;
+    position: relative;
+}
+
+.text-logo::after {
+    content: '●';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.5em;
+    color: var(--brand-primary);
+}
+
+.text-logo-subtitle {
+    font-size: 0.7rem;
+    color: var(--text-light);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: -8px;
+}
+
+/* ===================================
+   Enhanced Topbar
+   =================================== */
+.topbar {
+    background: var(--brand-gradient) !important;
+    padding: 12px 0 !important;
+    box-shadow: var(--shadow-md);
+}
+
+.topbar a {
+    transition: all var(--transition-fast);
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.topbar a:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+}
+
+/* ===================================
+   Enhanced Navbar
+   =================================== */
+.navbar {
+    padding: 1rem 0 !important;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.95) !important;
+    box-shadow: var(--shadow-md);
+}
+
+.navbar-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.nav-link {
+    font-weight: 600;
+    padding: 0.75rem 1.25rem !important;
+    margin: 0 0.25rem;
+    border-radius: 10px;
+    transition: all var(--transition-normal);
+    position: relative;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: var(--brand-gradient);
+    transition: all var(--transition-normal);
+    transform: translateX(-50%);
+    border-radius: 3px 3px 0 0;
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+    width: 80%;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--brand-primary) !important;
+    background: rgba(30, 136, 229, 0.05);
+}
+
+/* ===================================
+   Enhanced Buttons
+   =================================== */
+.btn-brand {
+    background: var(--brand-gradient) !important;
+    border: none !important;
+    padding: 0.75rem 2rem;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(30, 136, 229, 0.3);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-brand::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-brand:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-brand:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(30, 136, 229, 0.4);
+}
+
+.btn-brand:active {
+    transform: translateY(-1px);
+}
+
+/* ===================================
+   Hero Section Enhancements
+   =================================== */
+.swiper-container {
+    border-radius: 0 0 30px 30px;
+    overflow: hidden;
+}
+
+.swiper-slide img {
+    transition: transform 8s ease;
+}
+
+.swiper-slide-active img {
+    transform: scale(1.1);
+}
+
+.hero-badge {
+    background: rgba(30, 136, 229, 0.15) !important;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    padding: 0.75rem 2rem !important;
+    font-weight: 700;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.position-absolute.text-center {
+    z-index: 10;
+}
+
+.position-absolute h1 {
+    text-shadow: 2px 4px 20px rgba(0,0,0,0.3);
+    animation: fadeInUp 0.8s ease;
+}
+
+.position-absolute p {
+    text-shadow: 1px 2px 10px rgba(0,0,0,0.3);
+    animation: fadeInUp 1s ease;
+}
+
+.position-absolute .btn {
+    animation: fadeInUp 1.2s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================
+   Enhanced Section Titles
+   =================================== */
+.section-title h2 {
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    position: relative;
+    display: inline-block;
+}
+
+.section-title .bar {
+    height: 4px !important;
+    background: var(--brand-gradient) !important;
+    width: 80px !important;
+    margin: 1rem auto 0 !important;
+    border-radius: 10px;
+}
+
+/* ===================================
+   Enhanced Service Cards
+   =================================== */
+.service-card {
+    border: none !important;
+    border-radius: 20px !important;
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    background: white;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--brand-primary) !important;
+    position: relative;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--brand-gradient);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    z-index: 0;
+}
+
+.service-card:hover::before {
+    opacity: 0.05;
+}
+
+.service-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: var(--shadow-xl) !important;
+    border-left-width: 6px !important;
+}
+
+.service-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.feature-icon {
+    width: 70px !important;
+    height: 70px !important;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%) !important;
+    border-radius: 20px !important;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+}
+
+.service-card:hover .feature-icon {
+    transform: rotate(10deg) scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+.service-card h5 {
+    font-weight: 700;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+}
+
+.service-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ===================================
+   Enhanced About Section
+   =================================== */
+.about-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(30, 136, 229, 0.8) 0%, rgba(21, 101, 192, 0.9) 100%);
+    z-index: 1;
+}
+
+.about-header .container {
+    position: relative;
+    z-index: 2;
+}
+
+.fact {
+    background: white !important;
+    border-radius: 20px !important;
+    transition: all var(--transition-normal);
+    border: 2px solid transparent;
+    box-shadow: var(--shadow-sm);
+}
+
+.fact:hover {
+    border-color: var(--brand-primary);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.fact h5 {
+    font-weight: 800;
+    font-size: 1.3rem;
+}
+
+/* ===================================
+   Privacy & Terms Pages
+   =================================== */
+.privacy-header,
+.terms-header {
+    background: var(--brand-gradient) !important;
+    border-radius: 0 0 30px 30px;
+}
+
+.icon-circle {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-radius: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand-primary);
+    font-size: 1.5rem;
+}
+
+/* ===================================
+   Responsive Enhancements
+   =================================== */
+@media (max-width: 768px) {
+    .text-logo {
+        font-size: 1.8rem;
+    }
+    
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
+    
+    .btn-brand {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .service-card {
+        margin-bottom: 1rem;
+    }
+    
+    .topbar {
+        text-align: center;
+    }
+    
+    .topbar .d-flex {
+        flex-direction: column;
+        gap: 0.5rem !important;
+    }
+    
+    .navbar-brand {
+        align-items: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .text-logo {
+        font-size: 1.5rem;
+    }
+    
+    .position-absolute h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    .position-absolute p {
+        font-size: 0.9rem !important;
+    }
+}
+
+/* ===================================
+   Animations & Loading States
+   =================================== */
+.fade-in {
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.slide-up {
+    animation: slideUp 0.6s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Better link colors */
+a {
+    color: var(--brand-primary);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+a:hover {
+    color: var(--brand-dark);
+}
+
+/* Selection color */
+::selection {
+    background: var(--brand-primary);
+    color: white;
+}
+
+::-moz-selection {
+    background: var(--brand-primary);
+    color: white;
+}
