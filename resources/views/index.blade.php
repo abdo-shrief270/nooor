@@ -822,6 +822,10 @@
     .volunteer-btn:hover { transform: translateY(-3px); color: #fff; }
     .volunteer-girls { background: linear-gradient(135deg, #ec4899, #db2777); }
     .volunteer-boys { background: linear-gradient(135deg, #3a95cc, #1d4ed8); }
+    .volunteer-info { background: var(--gray-light, #f5f7fa); }
+    .volunteer-info ul { list-style: disc; }
+    .volunteer-info li { margin-bottom: 0.35rem; }
+    .volunteer-info li:last-child { margin-bottom: 0; }
 
     /* ===== شارة الإشهار بوزارة التضامن ===== */
     .ministry-badge {
@@ -1604,12 +1608,10 @@
     <span id="toastMsg">تم النسخ بنجاح</span>
 </div>
 
-{{--
-    TODO: استبدل الرابطين دول بلينك جروب الواتساب الفعلي لكل قسم أول ما الجروبات تتعمل.
---}}
 @php
-    $volunteerGirlsLink = '#';
-    $volunteerBoysLink = '#';
+    $volunteerBoysLink = 'https://chat.whatsapp.com/BsgjELyrtkM79oTJKKgDfb';
+    $volunteerGirlsLink = 'https://chat.whatsapp.com/GTEWzGXWRgM5SuXOBfrpZj';
+    $noorChannelLink = 'https://whatsapp.com/channel/0029VajqhUiDJ6H5bPlsYb2q';
 @endphp
 
 <!-- ===== Volunteer Modal ===== -->
@@ -1623,15 +1625,30 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
             </div>
             <div class="modal-body text-center pb-4">
-                <p class="text-muted mb-4">اختر القسم المناسب لينضم لجروب الواتساب الخاص بالتطوع</p>
-                <div class="d-flex flex-column gap-3">
-                    <a href="{{ $volunteerGirlsLink }}" target="_blank" rel="noopener" class="volunteer-btn volunteer-girls">
-                        <i class="fas fa-person-dress"></i> قسم البنات
-                    </a>
+                <p class="text-muted mb-3">اختار الجروب اللي يناسبك:</p>
+                <div class="d-flex flex-column gap-3 mb-4">
                     <a href="{{ $volunteerBoysLink }}" target="_blank" rel="noopener" class="volunteer-btn volunteer-boys">
-                        <i class="fas fa-person"></i> قسم الرجال
+                        <i class="fas fa-person"></i> متطوعين الرجال
+                    </a>
+                    <a href="{{ $volunteerGirlsLink }}" target="_blank" rel="noopener" class="volunteer-btn volunteer-girls">
+                        <i class="fas fa-person-dress"></i> متطوعات البنات
                     </a>
                 </div>
+                <div class="volunteer-info text-start rounded-3 p-3 mb-3">
+                    <p class="fw-bold mb-2">🎯 هنا بننسق:</p>
+                    <ul class="mb-0 ps-3">
+                        <li>المشاركة في القوافل الخيرية</li>
+                        <li>حملات تجهيز وتوزيع المساعدات</li>
+                        <li>الأنشطة داخل التجمع الخامس وخارجه</li>
+                    </ul>
+                </div>
+                <p class="text-muted mb-4">نورت الفريق.. وجودك معنا فارق كبير 🌿</p>
+                <a href="{{ $noorChannelLink }}" target="_blank" rel="noopener" class="btn btn-outline-success w-100 mb-3">
+                    <i class="fab fa-whatsapp"></i> تابع قناتنا على واتساب للتعرف على مؤسسة نور البخاري
+                </a>
+                <p class="text-muted small mb-0">
+                    💭 وحتى لو مش قادر تتبرع، ممكن تساعدنا بنشر المناشدة دي لكل اللي تعرفه
+                </p>
             </div>
         </div>
     </div>
