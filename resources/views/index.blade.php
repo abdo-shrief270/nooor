@@ -519,6 +519,7 @@
             position: fixed;
             bottom: 25px; left: 25px;
             z-index: 9990;
+            align-items: center;
             display: flex; flex-direction: column; gap: 12px;
         }
         .floating-btn {
@@ -777,7 +778,7 @@
         .pay-actions { width: 100%; flex-direction: row; }
         .pay-note { padding: 1rem 1.1rem; }
     }
-    
+
     /* ===== زرار التطوع في الناف بار ===== */
     .nav-cta-volunteer {
         display: inline-flex; align-items: center; gap: 0.5rem;
@@ -1101,7 +1102,7 @@
                         <span class="scope-badge"><i class="fas fa-map-marker-alt"></i> التجمع الخامس – فاليو مول 2</span>
                         <span class="scope-badge"><i class="fas fa-globe-africa"></i> داخل وخارج مصر</span>
                     </div>
-                    <h2 class="mb-3" style="font-size: 2.4rem;">مؤسسة إغاثية تنطلق من <span class="text-primary">قلب الأزهر الشريف</span></h2>
+                    <h2 class="mb-3" style="font-size: 2.4rem;">مؤسسة إغاثية امتدادًا لرسالة <span class="text-primary">الأزهر الشريف</span></h2>
                     <p class="fs-5 mb-4">يتم تجهيز قوافلنا الإغاثية داخل <strong>معاهد البخاري الأزهرية</strong> بكوادر متخصصة وبشفافية تامة، ومن هناك تنطلق إلى المستحقين في صعيد مصر، وقطاع غزة، والشقيقة السودان.</p>
                     <div class="row g-3">
                         <div class="col-sm-4">

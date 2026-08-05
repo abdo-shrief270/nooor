@@ -135,7 +135,7 @@
                         <img src="{{ asset('logo.jpg-large-preserve-ratio') }}" alt="مؤسسة نور البخاري">
                         <div>
                             <h4 class="text-white mb-1 fw-bold">مؤسسة نور البخاري</h4>
-                            <small class="text-white-50">من قلب الأزهر الشريف</small>
+                            <small class="text-white-50">مؤسسة إغاثية امتدادًا لرسالة الأزهر الشريف</small>
                         </div>
                     </div>
                     <p class="text-white-50 mb-3 small">مؤسسة إغاثية تعمل من قلب <strong class="text-white">معاهد البخاري الأزهرية</strong> على إيصال المساعدات بكل أمانة وشفافية إلى المستحقين داخل وخارج مصر.</p>

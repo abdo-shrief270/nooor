@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>من نحن | مؤسسة نور البخاري</title>
-    <meta name="description" content="مؤسسة نور البخاري - إغاثة وأمل من قلب الأزهر الشريف إلى صعيد مصر وغزة والسودان.">
+    <meta name="description" content="مؤسسة نور البخاري - مؤسسة إغاثية امتدادًا لرسالة الأزهر الشريف، لخدمة صعيد مصر وغزة والسودان.">
 
     <link rel="icon" href="{{ asset('logo.jpg-large-preserve-ratio') }}" type="image/jpeg">
 
@@ -240,7 +240,7 @@
                     <span class="chip"><i class="fas fa-mosque"></i> معاهد البخاري الأزهرية</span>
                     <span class="chip"><i class="fas fa-globe-africa"></i> داخل وخارج مصر</span>
                 </div>
-                <h2 class="mb-4" style="font-size: 2.5rem;">مؤسسة إغاثية تنطلق من <span class="text-primary">قلب الأزهر الشريف</span></h2>
+                <h2 class="mb-4" style="font-size: 2.5rem;">مؤسسة إغاثية امتدادًا لرسالة <span class="text-primary">الأزهر الشريف</span></h2>
                 <p class="fs-5 text-muted mb-4">مؤسسة <strong class="text-primary-deeper">نور البخاري</strong> هي صرح إغاثي يتخذ من <strong>معاهد البخاري الأزهرية</strong> مقراً لتجهيز قوافله، وانطلاقاً من القاهرة (التجمع الخامس – فاليو مول 2) نمدّ يد العون داخل مصر وخارجها.</p>
                 <p class="fs-5 text-muted mb-4">نؤمن بأن العمل الإغاثي رسالة سامية لا تعرف حدوداً جغرافية، فكل أسرة جائعة، وكل طفل يحتاج إلى ماء، وكل أرملة تنتظر الإغاثة — هي أمانة في أعناقنا.</p>
                 <a href="/#donations" class="btn btn-luxury">
