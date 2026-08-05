@@ -654,15 +654,15 @@
     </style>
     <style>
     /* ===== Donation Methods (مطابق للتصميم المرجعي) ===== */
-    .donate-head { margin-bottom: 2.75rem; }
+    .donate-head { margin-bottom: 1.5rem; }
     .donate-head-icon {
-        font-size: 1.9rem; color: var(--primary);
-        line-height: 1; margin-bottom: 0.75rem;
+        font-size: 1.35rem; color: var(--primary);
+        line-height: 1; margin-bottom: 0.5rem;
     }
-    .donate-head .section-title { margin-bottom: 0.6rem; }
+    .donate-head .section-title { font-size: 1.8rem; margin-bottom: 0.4rem; }
     .donate-head-sub {
         color: var(--slate-700); opacity: 0.6;
-        font-size: 1.1rem; font-weight: 600; margin: 0;
+        font-size: 0.9rem; font-weight: 600; margin: 0;
     }
 
     .pay-list { max-width: 800px; }
@@ -670,10 +670,10 @@
     .pay-row {
         background: var(--white);
         border: 1px solid #eef1f7;
-        border-radius: 1.1rem;
-        padding: 1.25rem 1.4rem;
-        display: flex; align-items: center; gap: 1.35rem;
-        margin-bottom: 1.25rem;
+        border-radius: 0.9rem;
+        padding: 0.85rem 1rem;
+        display: flex; align-items: center; gap: 0.9rem;
+        margin-bottom: 0.7rem;
         box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
         transition: all 0.3s ease;
     }
@@ -683,42 +683,42 @@
     }
 
     .pay-logo {
-        width: 86px; height: 86px; flex-shrink: 0;
-        border-radius: 1rem;
+        width: 62px; height: 62px; flex-shrink: 0;
+        border-radius: 0.8rem;
         display: flex; flex-direction: column;
         align-items: center; justify-content: center;
-        gap: 0.25rem; padding: 0.5rem;
+        gap: 0.18rem; padding: 0.35rem;
     }
-    .pay-logo img { max-width: 60px; max-height: 44px; object-fit: contain; }
-    .pay-logo .pay-logo-ic { font-size: 1.55rem; line-height: 1; }
-    .pay-logo .pay-logo-label { font-size: 0.68rem; font-weight: 800; }
+    .pay-logo img { max-width: 44px; max-height: 32px; object-fit: contain; }
+    .pay-logo .pay-logo-ic { font-size: 1.1rem; line-height: 1; }
+    .pay-logo .pay-logo-label { font-size: 0.56rem; font-weight: 800; }
 
     .pay-info { flex: 1; min-width: 0; text-align: start; }
     .pay-badge {
         display: inline-block;
-        font-size: 0.75rem; font-weight: 800;
-        padding: 0.28rem 0.85rem; border-radius: 100px;
-        margin-bottom: 0.5rem;
+        font-size: 0.66rem; font-weight: 800;
+        padding: 0.22rem 0.65rem; border-radius: 100px;
+        margin-bottom: 0.3rem;
     }
     .pay-id {
-        font-size: 1.35rem; font-weight: 900; color: var(--slate-900);
-        line-height: 1.2; margin-bottom: 0.35rem;
+        font-size: 1.05rem; font-weight: 900; color: var(--slate-900);
+        line-height: 1.2; margin-bottom: 0.2rem;
         direction: ltr; text-align: start; word-break: break-word;
     }
     .pay-desc {
         color: var(--slate-700); opacity: 0.6;
-        font-size: 0.9rem; font-weight: 600; margin: 0;
+        font-size: 0.78rem; font-weight: 600; margin: 0;
     }
 
     .pay-actions {
-        display: flex; flex-direction: column; gap: 0.6rem;
-        flex-shrink: 0; width: 158px;
+        display: flex; flex-direction: column; gap: 0.4rem;
+        flex-shrink: 0; width: 132px;
     }
     .pay-btn {
         display: inline-flex; align-items: center; justify-content: center;
-        gap: 0.5rem; width: 100%;
-        padding: 0.62rem 1rem; border-radius: 0.75rem;
-        font-weight: 800; font-size: 0.95rem;
+        gap: 0.35rem; width: 100%;
+        padding: 0.48rem 0.7rem; border-radius: 0.65rem;
+        font-weight: 800; font-size: 0.8rem;
         border: 1.5px solid transparent; cursor: pointer;
         text-decoration: none; transition: all 0.25s ease;
     }
@@ -745,36 +745,36 @@
 
     /* الملاحظة الأمنية أسفل القائمة */
     .pay-note {
-        max-width: 800px; margin-top: 1.75rem;
+        max-width: 800px; margin-top: 1rem;
         background: #ecf3fc;
         border-radius: 1.1rem;
-        padding: 1.2rem 1.5rem;
-        display: flex; align-items: center; gap: 1.1rem;
+        padding: 0.85rem 1rem;
+        display: flex; align-items: center; gap: 0.75rem;
     }
     .pay-note p {
         margin: 0; flex: 1;
-        color: #3c4d63; font-weight: 700; font-size: 0.96rem; line-height: 2;
+        color: #3c4d63; font-weight: 700; font-size: 0.8rem; line-height: 1.7;
     }
     .pay-note p strong { color: var(--slate-900); }
     .pay-note p a { color: var(--primary); font-weight: 800; text-decoration: none; }
     .pay-note p a:hover { text-decoration: underline; }
     .pay-note-icon {
-        width: 52px; height: 52px; flex-shrink: 0;
+        width: 40px; height: 40px; flex-shrink: 0;
         background: var(--white); color: var(--primary);
         border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
         box-shadow: 0 6px 16px -6px rgba(58, 149, 204, 0.45);
     }
-    .pay-note-icon .fa-stack { font-size: 0.75rem; }
+    .pay-note-icon .fa-stack { font-size: 0.58rem; }
 
     /* Responsive — small phones */
     @media (max-width: 575px) {
-        .pay-row { flex-wrap: wrap; gap: 0.9rem; padding: 1.1rem; }
-        .pay-logo { width: 60px; height: 60px; border-radius: 0.85rem; }
-        .pay-logo img { max-width: 42px; max-height: 32px; }
-        .pay-logo .pay-logo-ic { font-size: 1.2rem; }
-        .pay-logo .pay-logo-label { font-size: 0.55rem; }
-        .pay-id { font-size: 1.1rem; }
+        .pay-row { flex-wrap: wrap; gap: 0.65rem; padding: 0.8rem; }
+        .pay-logo { width: 52px; height: 52px; border-radius: 0.7rem; }
+        .pay-logo img { max-width: 36px; max-height: 27px; }
+        .pay-logo .pay-logo-ic { font-size: 1rem; }
+        .pay-logo .pay-logo-label { font-size: 0.5rem; }
+        .pay-id { font-size: 0.95rem; }
         .pay-actions { width: 100%; flex-direction: row; }
         .pay-note { padding: 1rem 1.1rem; }
     }
@@ -838,17 +838,19 @@
 
     /* ===== تبويبات داخل مصر / خارج مصر + وسائل التبرع ===== */
     .donate-scope-tabs, .donate-method-tabs {
-        list-style: none; padding: 0; margin: 0 0 2rem; gap: 0.6rem; flex-wrap: wrap;
+        list-style: none; padding: 0; margin: 0 0 1.15rem; gap: 0.4rem; flex-wrap: wrap;
     }
     .donate-scope-tabs .nav-link,
     .donate-method-tabs .nav-link {
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        padding: 0.7rem 1.4rem; border-radius: 100px;
-        font-weight: 800; font-size: 0.95rem;
+        display: inline-flex; align-items: center; gap: 0.35rem;
+        padding: 0.5rem 1rem; border-radius: 100px;
+        font-weight: 800; font-size: 0.8rem;
         background: var(--white); color: var(--slate-700);
         border: 1.5px solid var(--slate-200);
         transition: all 0.25s ease; cursor: pointer;
     }
+    .donate-scope-tabs .nav-link i,
+    .donate-method-tabs .nav-link i { font-size: 0.75rem; }
     .donate-method-tabs .nav-link { background: var(--primary-tint); }
     .donate-scope-tabs .nav-link:hover,
     .donate-method-tabs .nav-link:hover { color: var(--primary) !important; border-color: var(--primary); }
@@ -861,37 +863,41 @@
     /* ===== تبرع من خلال مندوب ===== */
     .agent-donate-grid {
         max-width: 800px; margin: 0 auto;
-        display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;
     }
     .agent-donate-card {
-        background: var(--white); border: 1px solid #eef1f7; border-radius: 1.25rem;
-        padding: 2rem 1.5rem; text-align: center;
+        background: var(--white); border: 1px solid #eef1f7; border-radius: 1rem;
+        padding: 1.15rem 1rem; text-align: center;
         box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
         transition: all 0.3s ease;
     }
     .agent-donate-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px -16px rgba(15,23,42,0.18); }
     .agent-donate-icon {
-        width: 64px; height: 64px; margin: 0 auto 1.1rem;
+        width: 44px; height: 44px; margin: 0 auto 0.65rem;
         background: var(--primary-tint); color: var(--primary);
         border-radius: 50%; display: flex; align-items: center; justify-content: center;
-        font-size: 1.6rem;
+        font-size: 1.05rem;
     }
-    .agent-donate-card h5 { font-weight: 900; margin-bottom: 0.6rem; }
-    .agent-donate-card p { color: var(--slate-700); opacity: 0.7; font-size: 0.92rem; margin-bottom: 1.4rem; }
+    .agent-donate-card h5 { font-size: 0.95rem; font-weight: 900; margin-bottom: 0.35rem; }
+    .agent-donate-card p { color: var(--slate-700); opacity: 0.7; font-size: 0.78rem; margin-bottom: 0.75rem; }
+    .agent-donate-card .btn { font-size: 0.8rem; padding: 0.55rem 0.75rem; }
 
     /* ===== خارج مصر ===== */
     .outside-egypt-note {
         max-width: 620px; background: var(--white); border-radius: 1.25rem;
-        padding: 2.5rem 2rem; box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+        padding: 1.5rem 1.25rem; box-shadow: 0 1px 2px rgba(15,23,42,0.04);
     }
     .outside-egypt-note .pay-note-icon {
-        width: 64px; height: 64px; font-size: 1.6rem;
+        width: 44px; height: 44px; font-size: 1.05rem;
         background: var(--primary-tint); color: var(--primary);
     }
+    .outside-egypt-note h5 { font-size: 0.95rem; }
+    .outside-egypt-note p { font-size: 0.8rem; }
+    .outside-egypt-note .btn { font-size: 0.8rem; padding: 0.55rem 0.8rem; }
 
     @media (max-width: 576px) {
         .agent-donate-grid { grid-template-columns: 1fr; }
-        .donate-scope-tabs .nav-link, .donate-method-tabs .nav-link { font-size: 0.85rem; padding: 0.6rem 1.1rem; }
+        .donate-scope-tabs .nav-link, .donate-method-tabs .nav-link { font-size: 0.72rem; padding: 0.45rem 0.75rem; }
     }
 
     /* ===== تكبير + هايلايت زرار التبرع ===== */
@@ -1279,13 +1285,8 @@
                 {{-- وسيلة التبرع --}}
                 <ul class="nav donate-method-tabs justify-content-center" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#method-instapay" type="button" role="tab">
-                            <i class="fas fa-mobile-screen-button"></i> انستا
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#method-wallet" type="button" role="tab">
-                            <i class="fas fa-wallet"></i> محفظة إلكترونية
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#method-digital" type="button" role="tab">
+                            <i class="fas fa-wallet"></i> انستا والمحافظ الإلكترونية
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
@@ -1297,8 +1298,8 @@
 
                 <div class="tab-content">
 
-                    {{-- 1) انستا --}}
-                    <div class="tab-pane fade show active" id="method-instapay" role="tabpanel">
+                    {{-- 1) انستا والمحافظ الإلكترونية --}}
+                    <div class="tab-pane fade show active" id="method-digital" role="tabpanel">
                         <div class="pay-list mx-auto">
 
                             {{-- InstaPay — Account 1 --}}
@@ -1346,17 +1347,14 @@
                             </div>
 
                         </div>
-                    </div>
 
-                    {{-- 2) محفظة إلكترونية --}}
-                    <div class="tab-pane fade" id="method-wallet" role="tabpanel">
+                        {{-- المحافظ الإلكترونية --}}
                         <div class="pay-list mx-auto">
 
                             {{-- Vodafone Cash — Account 1 --}}
                             <div class="pay-row brand-vodafone">
                                 <div class="pay-logo">
                                     <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
-                                    <span class="pay-logo-label">فودافون كاش</span>
                                 </div>
                                 <div class="pay-info">
                                     <span class="pay-badge">Vodafone Cash — الحساب الأول</span>
@@ -1379,7 +1377,6 @@
                             <div class="pay-row brand-vodafone">
                                 <div class="pay-logo">
                                     <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
-                                    <span class="pay-logo-label">فودافون كاش</span>
                                 </div>
                                 <div class="pay-info">
                                     <span class="pay-badge">Vodafone Cash — الحساب الثاني</span>
@@ -1402,7 +1399,6 @@
                             <div class="pay-row brand-etisalat">
                                 <div class="pay-logo">
                                     <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
-                                    <span class="pay-logo-label">اتصالات كاش</span>
                                 </div>
                                 <div class="pay-info">
                                     <span class="pay-badge">Etisalat Cash</span>
@@ -1424,7 +1420,7 @@
                         </div>
                     </div>
 
-                    {{-- 3) تبرع من خلال مندوب: عيني / مالي --}}
+                    {{-- 2) تبرع من خلال مندوب: عيني / مالي --}}
                     <div class="tab-pane fade" id="method-agent" role="tabpanel">
                         <div class="agent-donate-grid">
                             <div class="agent-donate-card">
