@@ -1639,13 +1639,9 @@
                         <li>الأنشطة داخل التجمع الخامس وخارجه</li>
                     </ul>
                 </div>
-                <p class="text-muted mb-4">نورت الفريق.. وجودك معنا فارق كبير 🌿</p>
                 <a href="{{ $noorChannelLink }}" target="_blank" rel="noopener" class="btn btn-outline-success w-100 mb-3">
                     <i class="fab fa-whatsapp"></i> تابع قناتنا على واتساب للتعرف على مؤسسة نور البخاري
                 </a>
-                <p class="text-muted small mb-0">
-                    💭 وحتى لو مش قادر تتبرع، ممكن تساعدنا بنشر المناشدة دي لكل اللي تعرفه
-                </p>
             </div>
         </div>
     </div>
