@@ -407,6 +407,69 @@
         }
         .activity-card-photo h4 { font-size: 1.4rem; font-weight: 900; margin-bottom: 0.85rem; }
         .activity-card-photo p { color: var(--slate-700); margin-bottom: 0; font-size: 1.02rem; }
+        .palm-activity-card { border-color: rgba(58, 149, 204, 0.32); }
+        .palm-activity-card .photo-wrap::after { background: linear-gradient(to top, rgba(29, 106, 152, 0.78), transparent 70%); }
+        .palm-activity-card .photo-icon { background: var(--primary); }
+        .palm-card-status {
+            position: absolute; top: 1rem; left: 1rem; z-index: 2;
+            padding: 0.35rem 0.7rem; border-radius: 100px;
+            background: rgba(255,255,255,0.94); color: var(--primary-deeper);
+            font-size: 0.7rem; font-weight: 900;
+            box-shadow: 0 6px 16px -8px rgba(15, 23, 42, 0.4);
+        }
+        .palm-card-counter {
+            position: relative; overflow: hidden;
+            margin: 1.15rem 0 0.8rem; padding: 1rem;
+            text-align: center; border-radius: 1.1rem;
+            background: linear-gradient(135deg, var(--primary-tint), #fff);
+            border: 1px solid rgba(58, 149, 204, 0.2);
+        }
+        .palm-card-counter::after {
+            content: '\f1bb';
+            position: absolute; left: -0.35rem; bottom: -1.1rem;
+            font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            color: rgba(58, 149, 204, 0.07); font-size: 5.5rem;
+            pointer-events: none;
+        }
+        .palm-card-counter-label {
+            display: block; position: relative; z-index: 1;
+            color: #64748b; font-size: 0.72rem; font-weight: 800;
+        }
+        .palm-card-count {
+            position: relative; z-index: 1;
+            display: flex; align-items: baseline; justify-content: center; gap: 0.45rem;
+            margin-top: 0.35rem; color: var(--slate-900); font-weight: 900;
+        }
+        .palm-card-count strong {
+            color: var(--primary-deeper); font-size: 2.8rem; line-height: 1;
+            font-weight: 900; direction: ltr; letter-spacing: -0.04em;
+            font-variant-numeric: tabular-nums;
+        }
+        .palm-card-progress {
+            height: 9px; overflow: hidden; margin-bottom: 0.45rem;
+            border-radius: 100px; background: var(--slate-200);
+        }
+        .palm-card-progress-bar {
+            width: 0; height: 100%; border-radius: inherit;
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+            transition: width 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .palm-card-progress-bar.is-visible { width: 38.4%; }
+        .palm-card-meta {
+            display: flex; justify-content: space-between;
+            color: #64748b; font-size: 0.7rem; font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        .palm-card-btn {
+            display: flex; align-items: center; justify-content: center; gap: 0.45rem;
+            width: 100%; margin-top: auto; padding: 0.7rem 1rem;
+            border-radius: 100px; background: var(--primary); color: #fff;
+            text-decoration: none; font-size: 0.9rem; font-weight: 900;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 22px -10px rgba(58, 149, 204, 0.8);
+        }
+        .palm-card-btn:hover { background: var(--primary-dark); color: #fff; transform: translateY(-2px); }
+        .palm-activity-card .body { display: flex; flex-direction: column; }
 
         /* ===== Donation Cards ===== */
         .donation-card {
@@ -519,6 +582,7 @@
             position: fixed;
             bottom: 25px; left: 25px;
             z-index: 9990;
+            align-items: center;
             display: flex; flex-direction: column; gap: 12px;
         }
         .floating-btn {
@@ -653,26 +717,29 @@
     </style>
     <style>
     /* ===== Donation Methods (مطابق للتصميم المرجعي) ===== */
-    .donate-head { margin-bottom: 2.75rem; }
+    .donate-head { margin-bottom: 1.5rem; }
     .donate-head-icon {
-        font-size: 1.9rem; color: var(--primary);
-        line-height: 1; margin-bottom: 0.75rem;
+        font-size: 1.35rem; color: var(--primary);
+        line-height: 1; margin-bottom: 0.5rem;
     }
-    .donate-head .section-title { margin-bottom: 0.6rem; }
+    .donate-head .section-title { font-size: 1.8rem; margin-bottom: 0.4rem; }
     .donate-head-sub {
         color: var(--slate-700); opacity: 0.6;
-        font-size: 1.1rem; font-weight: 600; margin: 0;
+        font-size: 0.9rem; font-weight: 600; margin: 0;
     }
 
-    .pay-list { max-width: 800px; }
+    .pay-list {
+        max-width: 800px;
+        margin-inline: auto;
+    }
 
     .pay-row {
         background: var(--white);
         border: 1px solid #eef1f7;
-        border-radius: 1.1rem;
-        padding: 1.25rem 1.4rem;
-        display: flex; align-items: center; gap: 1.35rem;
-        margin-bottom: 1.25rem;
+        border-radius: 0.9rem;
+        padding: 0.6rem 0.75rem;
+        display: flex; align-items: center; gap: 0.65rem;
+        margin-bottom: 0.45rem;
         box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
         transition: all 0.3s ease;
     }
@@ -682,42 +749,42 @@
     }
 
     .pay-logo {
-        width: 86px; height: 86px; flex-shrink: 0;
-        border-radius: 1rem;
+        width: 50px; height: 50px; flex-shrink: 0;
+        border-radius: 0.8rem;
         display: flex; flex-direction: column;
         align-items: center; justify-content: center;
-        gap: 0.25rem; padding: 0.5rem;
+        gap: 0.18rem; padding: 0.35rem;
     }
-    .pay-logo img { max-width: 60px; max-height: 44px; object-fit: contain; }
-    .pay-logo .pay-logo-ic { font-size: 1.55rem; line-height: 1; }
-    .pay-logo .pay-logo-label { font-size: 0.68rem; font-weight: 800; }
+    .pay-logo img { max-width: 44px; max-height: 32px; object-fit: contain; }
+    .pay-logo .pay-logo-ic { font-size: 1.1rem; line-height: 1; }
+    .pay-logo .pay-logo-label { font-size: 0.56rem; font-weight: 800; }
 
     .pay-info { flex: 1; min-width: 0; text-align: start; }
     .pay-badge {
         display: inline-block;
-        font-size: 0.75rem; font-weight: 800;
-        padding: 0.28rem 0.85rem; border-radius: 100px;
-        margin-bottom: 0.5rem;
+        font-size: 0.66rem; font-weight: 800;
+        padding: 0.22rem 0.65rem; border-radius: 100px;
+        margin-bottom: 0.3rem;
     }
     .pay-id {
-        font-size: 1.35rem; font-weight: 900; color: var(--slate-900);
-        line-height: 1.2; margin-bottom: 0.35rem;
+        font-size: 0.95rem; font-weight: 900; color: var(--slate-900);
+        line-height: 1.2; margin-bottom: 0.2rem;
         direction: ltr; text-align: start; word-break: break-word;
     }
     .pay-desc {
         color: var(--slate-700); opacity: 0.6;
-        font-size: 0.9rem; font-weight: 600; margin: 0;
+        font-size: 0.72rem; font-weight: 600; margin: 0;
     }
 
     .pay-actions {
-        display: flex; flex-direction: column; gap: 0.6rem;
-        flex-shrink: 0; width: 158px;
+        display: flex; flex-direction: column; gap: 0.3rem;
+        flex-shrink: 0; width: 115px;
     }
     .pay-btn {
         display: inline-flex; align-items: center; justify-content: center;
-        gap: 0.5rem; width: 100%;
-        padding: 0.62rem 1rem; border-radius: 0.75rem;
-        font-weight: 800; font-size: 0.95rem;
+        gap: 0.35rem; width: 100%;
+        padding: 0.38rem 0.5rem; border-radius: 0.6rem;
+        font-weight: 800; font-size: 0.7rem;
         border: 1.5px solid transparent; cursor: pointer;
         text-decoration: none; transition: all 0.25s ease;
     }
@@ -744,40 +811,41 @@
 
     /* الملاحظة الأمنية أسفل القائمة */
     .pay-note {
-        max-width: 800px; margin-top: 1.75rem;
+        max-width: 800px; margin-top: 1rem;
         background: #ecf3fc;
         border-radius: 1.1rem;
-        padding: 1.2rem 1.5rem;
-        display: flex; align-items: center; gap: 1.1rem;
+        padding: 0.85rem 1rem;
+        display: flex; align-items: center; gap: 0.75rem;
     }
     .pay-note p {
         margin: 0; flex: 1;
-        color: #3c4d63; font-weight: 700; font-size: 0.96rem; line-height: 2;
+        color: #3c4d63; font-weight: 700; font-size: 0.8rem; line-height: 1.7;
     }
     .pay-note p strong { color: var(--slate-900); }
     .pay-note p a { color: var(--primary); font-weight: 800; text-decoration: none; }
     .pay-note p a:hover { text-decoration: underline; }
     .pay-note-icon {
-        width: 52px; height: 52px; flex-shrink: 0;
+        width: 40px; height: 40px; flex-shrink: 0;
         background: var(--white); color: var(--primary);
         border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
         box-shadow: 0 6px 16px -6px rgba(58, 149, 204, 0.45);
     }
-    .pay-note-icon .fa-stack { font-size: 0.75rem; }
+    .pay-note-icon .fa-stack { font-size: 0.58rem; }
 
     /* Responsive — small phones */
     @media (max-width: 575px) {
-        .pay-row { flex-wrap: wrap; gap: 0.9rem; padding: 1.1rem; }
-        .pay-logo { width: 60px; height: 60px; border-radius: 0.85rem; }
-        .pay-logo img { max-width: 42px; max-height: 32px; }
-        .pay-logo .pay-logo-ic { font-size: 1.2rem; }
-        .pay-logo .pay-logo-label { font-size: 0.55rem; }
-        .pay-id { font-size: 1.1rem; }
-        .pay-actions { width: 100%; flex-direction: row; }
+        .pay-row { flex-wrap: wrap; gap: 0.45rem; padding: 0.5rem; }
+        .pay-logo { width: 42px; height: 42px; border-radius: 0.65rem; }
+        .pay-logo img { max-width: 32px; max-height: 24px; }
+        .pay-logo .pay-logo-ic { font-size: 0.9rem; }
+        .pay-logo .pay-logo-label { font-size: 0.5rem; }
+        .pay-id { font-size: 0.85rem; }
+        .pay-actions { width: 100%; flex-direction: row; gap: 0.3rem; }
+        .pay-btn { padding: 0.32rem 0.4rem; font-size: 0.65rem; }
         .pay-note { padding: 1rem 1.1rem; }
     }
-    
+
     /* ===== زرار التطوع في الناف بار ===== */
     .nav-cta-volunteer {
         display: inline-flex; align-items: center; gap: 0.5rem;
@@ -822,6 +890,10 @@
     .volunteer-btn:hover { transform: translateY(-3px); color: #fff; }
     .volunteer-girls { background: linear-gradient(135deg, #ec4899, #db2777); }
     .volunteer-boys { background: linear-gradient(135deg, #3a95cc, #1d4ed8); }
+    .volunteer-info { background: var(--gray-light, #f5f7fa); }
+    .volunteer-info ul { list-style: disc; }
+    .volunteer-info li { margin-bottom: 0.35rem; }
+    .volunteer-info li:last-child { margin-bottom: 0; }
 
     /* ===== شارة الإشهار بوزارة التضامن ===== */
     .ministry-badge {
@@ -833,17 +905,19 @@
 
     /* ===== تبويبات داخل مصر / خارج مصر + وسائل التبرع ===== */
     .donate-scope-tabs, .donate-method-tabs {
-        list-style: none; padding: 0; margin: 0 0 2rem; gap: 0.6rem; flex-wrap: wrap;
+        list-style: none; padding: 0; margin: 0 0 0.85rem; gap: 0.25rem; flex-wrap: wrap;
     }
     .donate-scope-tabs .nav-link,
     .donate-method-tabs .nav-link {
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        padding: 0.7rem 1.4rem; border-radius: 100px;
-        font-weight: 800; font-size: 0.95rem;
+        display: inline-flex; align-items: center; gap: 0.35rem;
+        padding: 0.4rem 0.7rem; border-radius: 100px;
+        font-weight: 800; font-size: 0.72rem;
         background: var(--white); color: var(--slate-700);
         border: 1.5px solid var(--slate-200);
         transition: all 0.25s ease; cursor: pointer;
     }
+    .donate-scope-tabs .nav-link i,
+    .donate-method-tabs .nav-link i { font-size: 0.75rem; }
     .donate-method-tabs .nav-link { background: var(--primary-tint); }
     .donate-scope-tabs .nav-link:hover,
     .donate-method-tabs .nav-link:hover { color: var(--primary) !important; border-color: var(--primary); }
@@ -856,37 +930,43 @@
     /* ===== تبرع من خلال مندوب ===== */
     .agent-donate-grid {
         max-width: 800px; margin: 0 auto;
-        display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;
     }
     .agent-donate-card {
-        background: var(--white); border: 1px solid #eef1f7; border-radius: 1.25rem;
-        padding: 2rem 1.5rem; text-align: center;
+        background: var(--white); border: 1px solid #eef1f7; border-radius: 1rem;
+        padding: 1.15rem 1rem; text-align: center;
         box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
         transition: all 0.3s ease;
     }
     .agent-donate-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px -16px rgba(15,23,42,0.18); }
     .agent-donate-icon {
-        width: 64px; height: 64px; margin: 0 auto 1.1rem;
+        width: 44px; height: 44px; margin: 0 auto 0.65rem;
         background: var(--primary-tint); color: var(--primary);
         border-radius: 50%; display: flex; align-items: center; justify-content: center;
-        font-size: 1.6rem;
+        font-size: 1.05rem;
     }
-    .agent-donate-card h5 { font-weight: 900; margin-bottom: 0.6rem; }
-    .agent-donate-card p { color: var(--slate-700); opacity: 0.7; font-size: 0.92rem; margin-bottom: 1.4rem; }
+    .agent-donate-card h5 { font-size: 0.95rem; font-weight: 900; margin-bottom: 0.35rem; }
+    .agent-donate-card p { color: var(--slate-700); opacity: 0.7; font-size: 0.78rem; margin-bottom: 0.75rem; }
+    .agent-donate-card .btn { font-size: 0.8rem; padding: 0.55rem 0.75rem; }
 
     /* ===== خارج مصر ===== */
     .outside-egypt-note {
         max-width: 620px; background: var(--white); border-radius: 1.25rem;
-        padding: 2.5rem 2rem; box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+        padding: 1.5rem 1.25rem; box-shadow: 0 1px 2px rgba(15,23,42,0.04);
     }
     .outside-egypt-note .pay-note-icon {
-        width: 64px; height: 64px; font-size: 1.6rem;
+        width: 44px; height: 44px; font-size: 1.05rem;
         background: var(--primary-tint); color: var(--primary);
     }
+    .outside-egypt-note h5 { font-size: 0.95rem; }
+    .outside-egypt-note p { font-size: 0.8rem; }
+    .outside-egypt-note .btn { font-size: 0.8rem; padding: 0.55rem 0.8rem; }
 
     @media (max-width: 576px) {
         .agent-donate-grid { grid-template-columns: 1fr; }
-        .donate-scope-tabs .nav-link, .donate-method-tabs .nav-link { font-size: 0.85rem; padding: 0.6rem 1.1rem; }
+        .donate-scope-tabs, .donate-method-tabs { gap: 0.2rem; }
+        .donate-scope-tabs .nav-link, .donate-method-tabs .nav-link { font-size: 0.62rem; padding: 0.32rem 0.48rem; gap: 0.25rem; }
+        .donate-scope-tabs .nav-link i, .donate-method-tabs .nav-link i { font-size: 0.62rem; }
     }
 
     /* ===== تكبير + هايلايت زرار التبرع ===== */
@@ -1097,7 +1177,7 @@
                         <span class="scope-badge"><i class="fas fa-map-marker-alt"></i> التجمع الخامس – فاليو مول 2</span>
                         <span class="scope-badge"><i class="fas fa-globe-africa"></i> داخل وخارج مصر</span>
                     </div>
-                    <h2 class="mb-3" style="font-size: 2.4rem;">مؤسسة إغاثية تنطلق من <span class="text-primary">قلب الأزهر الشريف</span></h2>
+                    <h2 class="mb-3" style="font-size: 2.4rem;">مؤسسة إغاثية امتدادًا لرسالة <span class="text-primary">الأزهر الشريف</span></h2>
                     <p class="fs-5 mb-4">يتم تجهيز قوافلنا الإغاثية داخل <strong>معاهد البخاري الأزهرية</strong> بكوادر متخصصة وبشفافية تامة، ومن هناك تنطلق إلى المستحقين في صعيد مصر، وقطاع غزة، والشقيقة السودان.</p>
                     <div class="row g-3">
                         <div class="col-sm-4">
@@ -1224,6 +1304,34 @@
                     ['الطرود الغذائية', 'fa-box', 'توزيع طرود غذائية متكاملة تسد احتياجات الأسر لفترات مستدامة.', 14],
                 ];
             @endphp
+            <div class="col-md-6 col-lg-3 mx-auto">
+                <article class="activity-card-photo palm-activity-card" id="palm-endowment" data-palm-campaign>
+                    <div class="photo-wrap">
+                        <img src="{{ asset('assets/images/clinic/19.JPG') }}" alt="مشروع العمر - وقف النخيل">
+                        <span class="palm-card-status">الحملة مستمرة</span>
+                        <div class="photo-icon"><i class="fas fa-tree"></i></div>
+                    </div>
+                    <div class="body">
+                        <h4>مشروع العمر (وقف النخيل)</h4>
+                        <p>ساهم في غرس نخلة كصدقة جارية لك أو لمن تحب، بهدف الوصول إلى 3000 نخلة.</p>
+                        <div class="palm-card-counter">
+                            <span class="palm-card-counter-label">المتبقي من هدف 3,000 نخلة</span>
+                            <div class="palm-card-count" aria-live="polite">
+                                <strong data-countdown-from="3000" data-countdown-to="1847">3,000</strong>
+                                <span>نخلة</span>
+                            </div>
+                        </div>
+                        <div class="palm-card-progress" role="progressbar" aria-label="نسبة اكتمال حملة وقف النخيل" aria-valuemin="0" aria-valuemax="3000" aria-valuenow="1153">
+                            <div class="palm-card-progress-bar"></div>
+                        </div>
+                        <div class="palm-card-meta">
+                            <span>تم وقف 1,153</span>
+                            <span>38.4%</span>
+                        </div>
+                        <a href="#donations" class="palm-card-btn"><i class="fas fa-hand-holding-heart"></i> تبرع الآن</a>
+                    </div>
+                </article>
+            </div>
             @foreach($projects as $p)
             <div class="col-md-6 col-lg-3">
                 <div class="activity-card-photo">
@@ -1260,6 +1368,11 @@
                 </button>
             </li>
             <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#scope-agent" type="button" role="tab">
+                    <i class="fas fa-handshake-angle"></i> تبرع من خلال مندوب
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#scope-outside" type="button" role="tab">
                     <i class="fas fa-earth-africa"></i> خارج مصر
                 </button>
@@ -1270,31 +1383,8 @@
 
             {{-- ===== داخل مصر ===== --}}
             <div class="tab-pane fade show active" id="scope-inside" role="tabpanel">
-
-                {{-- وسيلة التبرع --}}
-                <ul class="nav donate-method-tabs justify-content-center" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#method-instapay" type="button" role="tab">
-                            <i class="fas fa-mobile-screen-button"></i> انستا
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#method-wallet" type="button" role="tab">
-                            <i class="fas fa-wallet"></i> محفظة إلكترونية
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#method-agent" type="button" role="tab">
-                            <i class="fas fa-handshake-angle"></i> تبرع من خلال مندوب
-                        </button>
-                    </li>
-                </ul>
-
-                <div class="tab-content">
-
-                    {{-- 1) انستا --}}
-                    <div class="tab-pane fade show active" id="method-instapay" role="tabpanel">
-                        <div class="pay-list mx-auto">
+                {{-- انستا والمحافظ الإلكترونية --}}
+                <div class="pay-list">
 
                             {{-- InstaPay — Account 1 --}}
                             <div class="pay-row brand-instapay">
@@ -1318,86 +1408,32 @@
                                 </div>
                             </div>
 
-                            {{-- InstaPay — Account 2 --}}
-                            <div class="pay-row brand-instapay">
-                                <div class="pay-logo">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/InstaPay_Logo.png" alt="InstaPay">
-                                </div>
-                                <div class="pay-info">
-                                    <span class="pay-badge">حساب InstaPay</span>
-                                    <div class="pay-id">husseinabdellatif.eg@instapay</div>
-                                    <p class="pay-desc">انسخ المعرف واستخدمه في تطبيق InstaPay</p>
-                                </div>
-                                <div class="pay-actions">
-                                    <button type="button" class="pay-btn pay-btn-copy"
-                                            onclick="copyId('husseinabdellatif.eg@instapay', this)">
-                                        نسخ <i class="far fa-copy"></i>
-                                    </button>
-                                    <a href="https://ipn.eg/S/husseinabdellatif.eg/instapay/4SGbFV"
-                                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
-                                        تحويل الآن <i class="fas fa-arrow-left"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    {{-- 2) محفظة إلكترونية --}}
-                    <div class="tab-pane fade" id="method-wallet" role="tabpanel">
-                        <div class="pay-list mx-auto">
-
-                            {{-- Vodafone Cash — Account 1 --}}
-                            <div class="pay-row brand-vodafone">
-                                <div class="pay-logo">
-                                    <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
-                                    <span class="pay-logo-label">فودافون كاش</span>
-                                </div>
-                                <div class="pay-info">
-                                    <span class="pay-badge">Vodafone Cash — الحساب الأول</span>
-                                    <div class="pay-id">01062720072</div>
-                                    <p class="pay-desc">انسخ الرقم واستخدمه في تطبيق فودافون كاش</p>
-                                </div>
-                                <div class="pay-actions">
-                                    <button type="button" class="pay-btn pay-btn-copy"
-                                            onclick="copyId('01062720072', this)">
-                                        نسخ الرقم <i class="far fa-copy"></i>
-                                    </button>
-                                    <a href="https://vf.eg/vfcash?id=mt&qrId=Z3zC5u"
-                                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
-                                        تحويل الآن <i class="fas fa-arrow-left"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            {{-- Vodafone Cash — Account 2 --}}
-                            <div class="pay-row brand-vodafone">
-                                <div class="pay-logo">
-                                    <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
-                                    <span class="pay-logo-label">فودافون كاش</span>
-                                </div>
-                                <div class="pay-info">
-                                    <span class="pay-badge">Vodafone Cash — الحساب الثاني</span>
-                                    <div class="pay-id">01055201766</div>
-                                    <p class="pay-desc">انسخ الرقم واستخدمه في تطبيق فودافون كاش</p>
-                                </div>
-                                <div class="pay-actions">
-                                    <button type="button" class="pay-btn pay-btn-copy"
-                                            onclick="copyId('01055201766', this)">
-                                        نسخ الرقم <i class="far fa-copy"></i>
-                                    </button>
-                                    <a href="https://vf.eg/vfcash?id=mt&qrId=76r1GS"
-                                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
-                                        تحويل الآن <i class="fas fa-arrow-left"></i>
-                                    </a>
-                                </div>
-                            </div>
+                            <!--{{-- InstaPay — Account 2 --}}-->
+                            <!--<div class="pay-row brand-instapay">-->
+                            <!--    <div class="pay-logo">-->
+                            <!--        <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/InstaPay_Logo.png" alt="InstaPay">-->
+                            <!--    </div>-->
+                            <!--    <div class="pay-info">-->
+                            <!--        <span class="pay-badge">حساب InstaPay</span>-->
+                            <!--        <div class="pay-id">husseinabdellatif.eg@instapay</div>-->
+                            <!--        <p class="pay-desc">انسخ المعرف واستخدمه في تطبيق InstaPay</p>-->
+                            <!--    </div>-->
+                            <!--    <div class="pay-actions">-->
+                            <!--        <button type="button" class="pay-btn pay-btn-copy"-->
+                            <!--                onclick="copyId('husseinabdellatif.eg@instapay', this)">-->
+                            <!--            نسخ <i class="far fa-copy"></i>-->
+                            <!--        </button>-->
+                            <!--        <a href="https://ipn.eg/S/husseinabdellatif.eg/instapay/4SGbFV"-->
+                            <!--           target="_blank" rel="noopener" class="pay-btn pay-btn-go">-->
+                            <!--            تحويل الآن <i class="fas fa-arrow-left"></i>-->
+                            <!--        </a>-->
+                            <!--    </div>-->
+                            <!--</div>-->
 
                             {{-- Etisalat Cash --}}
                             <div class="pay-row brand-etisalat">
                                 <div class="pay-logo">
                                     <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
-                                    <span class="pay-logo-label">اتصالات كاش</span>
                                 </div>
                                 <div class="pay-info">
                                     <span class="pay-badge">Etisalat Cash</span>
@@ -1416,12 +1452,56 @@
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
+                            {{-- Vodafone Cash — Account 1 --}}
+                            <!--<div class="pay-row brand-vodafone">-->
+                            <!--    <div class="pay-logo">-->
+                            <!--        <i class="fas fa-mobile-screen-button pay-logo-ic"></i>-->
+                            <!--    </div>-->
+                            <!--    <div class="pay-info">-->
+                            <!--        <span class="pay-badge">Vodafone Cash — الحساب الأول</span>-->
+                            <!--        <div class="pay-id">01062720072</div>-->
+                            <!--        <p class="pay-desc">انسخ الرقم واستخدمه في تطبيق فودافون كاش</p>-->
+                            <!--    </div>-->
+                            <!--    <div class="pay-actions">-->
+                            <!--        <button type="button" class="pay-btn pay-btn-copy"-->
+                            <!--                onclick="copyId('01062720072', this)">-->
+                            <!--            نسخ الرقم <i class="far fa-copy"></i>-->
+                            <!--        </button>-->
+                            <!--        <a href="https://vf.eg/vfcash?id=mt&qrId=Z3zC5u"-->
+                            <!--           target="_blank" rel="noopener" class="pay-btn pay-btn-go">-->
+                            <!--            تحويل الآن <i class="fas fa-arrow-left"></i>-->
+                            <!--        </a>-->
+                            <!--    </div>-->
+                            <!--</div>-->
 
-                    {{-- 3) تبرع من خلال مندوب: عيني / مالي --}}
-                    <div class="tab-pane fade" id="method-agent" role="tabpanel">
-                        <div class="agent-donate-grid">
+                            <!--{{-- Vodafone Cash — Account 2 --}}-->
+                            <div class="pay-row brand-vodafone">
+                                <div class="pay-logo">
+                                    <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
+                                </div>
+                                <div class="pay-info">
+                                    <span class="pay-badge">Vodafone Cash</span>
+                                    <div class="pay-id">01055201766</div>
+                                    <p class="pay-desc">انسخ الرقم واستخدمه في تطبيق فودافون كاش</p>
+                                </div>
+                                <div class="pay-actions">
+                                    <button type="button" class="pay-btn pay-btn-copy"
+                                            onclick="copyId('01055201766', this)">
+                                        نسخ الرقم <i class="far fa-copy"></i>
+                                    </button>
+                                    <a href="https://vf.eg/vfcash?id=mt&qrId=76r1GS"
+                                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
+                                        تحويل الآن <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                </div>
+            </div>
+
+            {{-- ===== تبرع من خلال مندوب ===== --}}
+            <div class="tab-pane fade" id="scope-agent" role="tabpanel">
+                <div class="agent-donate-grid">
                             <div class="agent-donate-card">
                                 <div class="agent-donate-icon"><i class="fas fa-box-open"></i></div>
                                 <h5>تبرع عيني</h5>
@@ -1438,9 +1518,6 @@
                                     <i class="fab fa-whatsapp"></i> طلب زيارة مندوب
                                 </a>
                             </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
@@ -1604,12 +1681,10 @@
     <span id="toastMsg">تم النسخ بنجاح</span>
 </div>
 
-{{--
-    TODO: استبدل الرابطين دول بلينك جروب الواتساب الفعلي لكل قسم أول ما الجروبات تتعمل.
---}}
 @php
-    $volunteerGirlsLink = '#';
-    $volunteerBoysLink = '#';
+    $volunteerBoysLink = 'https://chat.whatsapp.com/BsgjELyrtkM79oTJKKgDfb';
+    $volunteerGirlsLink = 'https://chat.whatsapp.com/GTEWzGXWRgM5SuXOBfrpZj';
+    $noorChannelLink = 'https://whatsapp.com/channel/0029VajqhUiDJ6H5bPlsYb2q';
 @endphp
 
 <!-- ===== Volunteer Modal ===== -->
@@ -1623,15 +1698,26 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
             </div>
             <div class="modal-body text-center pb-4">
-                <p class="text-muted mb-4">اختر القسم المناسب لينضم لجروب الواتساب الخاص بالتطوع</p>
-                <div class="d-flex flex-column gap-3">
-                    <a href="{{ $volunteerGirlsLink }}" target="_blank" rel="noopener" class="volunteer-btn volunteer-girls">
-                        <i class="fas fa-person-dress"></i> قسم البنات
-                    </a>
+                <p class="text-muted mb-3">اختار الجروب اللي يناسبك:</p>
+                <div class="d-flex flex-column gap-3 mb-4">
                     <a href="{{ $volunteerBoysLink }}" target="_blank" rel="noopener" class="volunteer-btn volunteer-boys">
-                        <i class="fas fa-person"></i> قسم الرجال
+                        <i class="fas fa-person"></i> متطوعين الرجال
+                    </a>
+                    <a href="{{ $volunteerGirlsLink }}" target="_blank" rel="noopener" class="volunteer-btn volunteer-girls">
+                        <i class="fas fa-person-dress"></i> متطوعات البنات
                     </a>
                 </div>
+                <div class="volunteer-info text-start rounded-3 p-3 mb-3">
+                    <p class="fw-bold mb-2">🎯 هنا بننسق:</p>
+                    <ul class="mb-0 ps-3">
+                        <li>المشاركة في القوافل الخيرية</li>
+                        <li>حملات تجهيز وتوزيع المساعدات</li>
+                        <li>الأنشطة داخل التجمع الخامس وخارجه</li>
+                    </ul>
+                </div>
+                <a href="{{ $noorChannelLink }}" target="_blank" rel="noopener" class="btn btn-outline-success w-100 mb-3">
+                    <i class="fab fa-whatsapp"></i> تابع قناتنا على واتساب للتعرف على مؤسسة نور البخاري
+                </a>
             </div>
         </div>
     </div>
@@ -1756,6 +1842,36 @@
     }, { threshold: 0.4 });
 
     document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+    // Palm activity card: count down from the full goal to the mocked remaining total.
+    const palmCampaign = document.querySelector('[data-palm-campaign]');
+    if (palmCampaign) {
+        const palmCounter = palmCampaign.querySelector('[data-countdown-to]');
+        const palmProgress = palmCampaign.querySelector('.palm-card-progress-bar');
+        const palmObserver = new IntersectionObserver((entries, observer) => {
+            if (!entries[0].isIntersecting) return;
+
+            const start = Number(palmCounter.dataset.countdownFrom);
+            const end = Number(palmCounter.dataset.countdownTo);
+            const duration = 2400;
+            const startTime = performance.now();
+            const formatter = new Intl.NumberFormat('en-US');
+
+            palmProgress.classList.add('is-visible');
+
+            function tick(now) {
+                const progress = Math.min((now - startTime) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                palmCounter.textContent = formatter.format(Math.round(start - ((start - end) * eased)));
+                if (progress < 1) requestAnimationFrame(tick);
+            }
+
+            requestAnimationFrame(tick);
+            observer.disconnect();
+        }, { threshold: 0.35 });
+
+        palmObserver.observe(palmCampaign);
+    }
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
