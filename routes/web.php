@@ -5,10 +5,12 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DonationMethodController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SiteImageController;
+use App\Http\Controllers\PublicSiteImageController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'home'])->name('home');
+Route::get('/media/site-images/{siteImage}', PublicSiteImageController::class)->name('site-images.show');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
 Route::get('/privacy', fn (SiteController $controller) => $controller->page('privacy-policy'))->name('privacy');
 Route::get('/terms', fn (SiteController $controller) => $controller->page('terms-and-conditions'))->name('terms');

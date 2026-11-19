@@ -58,7 +58,7 @@
         /* Inner Header */
         .inner-header {
             background: linear-gradient(135deg, rgba(15,23,42,0.85), rgba(29,106,152,0.85))
-                        @if($aboutImages->get(0)), url('{{ Storage::url($aboutImages->get(0)->path) }}') center/cover @endif;
+                        @if($aboutImages->get(0)), url('{{ route('site-images.show', $aboutImages->get(0), false) }}') center/cover @endif;
             padding: 8rem 0 6rem;
             color: var(--white);
             text-align: center;
@@ -295,7 +295,7 @@
     <div class="container">
         <div class="row align-items-center g-5">
             <div class="col-lg-6">
-                @if($aboutImages->get(1))<img src="{{ Storage::url($aboutImages->get(1)->path) }}" class="img-fluid rounded-4 shadow-lg" alt="{{ $aboutImages->get(1)->alt_text }}">@endif
+                @if($aboutImages->get(1))<img src="{{ route('site-images.show', $aboutImages->get(1), false) }}" class="img-fluid rounded-4 shadow-lg" alt="{{ $aboutImages->get(1)->alt_text }}">@endif
             </div>
             <div class="col-lg-6 ps-lg-5">
                 <h2 class="mb-4">لماذا مؤسسة نور البخاري؟</h2>

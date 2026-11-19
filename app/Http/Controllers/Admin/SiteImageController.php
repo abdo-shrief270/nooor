@@ -9,6 +9,7 @@ use App\Models\SiteImage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use RuntimeException;
 
 class SiteImageController extends Controller
 {
@@ -31,6 +32,9 @@ class SiteImageController extends Controller
     {
         $data = $request->safe()->except('image');
         $data['path'] = $request->file('image')->store('site-images/'.$data['group'], 'public');
+        if ($data['path'] === false) {
+            throw new RuntimeException('Unable to store the uploaded site image.');
+        }
         $data['is_active'] = $request->boolean('is_active');
         $data['counter_enabled'] = $data['group'] === 'hero' && $request->boolean('counter_enabled');
         SiteImage::query()->create($data);

@@ -1188,7 +1188,7 @@
                     @foreach($images->get('hero', collect())->take(5) as $image)
                         @php $slideCampaign = $image->counterData(); @endphp
                         <div class="swiper-slide">
-                            <img src="{{ Storage::url($image->path) }}" class="swiper-image" alt="{{ $image->alt_text ?: $settings['site_name'] }}">
+                            <img src="{{ route('site-images.show', $image, false) }}" class="swiper-image" alt="{{ $image->alt_text ?: $settings['site_name'] }}">
                             @if($slideCampaign)
                             <div class="hero-campaign-overlay" data-campaign>
                                 <div>
@@ -1379,7 +1379,7 @@
                 <article class="activity-card-photo palm-activity-card" id="palm-endowment" data-campaign>
                     <div class="photo-wrap">
                         @php $palmImage = $projectImages->get(0); @endphp
-                        <img src="{{ Storage::url($palmImage->path) }}" alt="{{ $palmImage->alt_text }}">
+                        <img src="{{ route('site-images.show', $palmImage, false) }}" alt="{{ $palmImage->alt_text }}">
                         <span class="palm-card-status">{{ $settings['palm_campaign_status'] }}</span>
                         <div class="photo-icon"><i class="fas fa-tree"></i></div>
                     </div>
@@ -1411,7 +1411,7 @@
                 <article class="activity-card-photo palm-activity-card" data-campaign>
                     <div class="photo-wrap">
                         @php $projectImage = $projectImages->get($loop->iteration); @endphp
-                        <img src="{{ Storage::url($projectImage->path) }}" alt="{{ $projectImage->alt_text }}">
+                        <img src="{{ route('site-images.show', $projectImage, false) }}" alt="{{ $projectImage->alt_text }}">
                         <span class="palm-card-status">{{ $campaign['status'] }}</span>
                         <div class="photo-icon"><i class="fas {{ $campaign['icon'] }}"></i></div>
                     </div>
@@ -1593,7 +1593,7 @@
             @foreach($documentationImages as $documentationImage)
             <div class="col-md-6 col-lg-3">
                 <div class="doc-tile">
-                    <img src="{{ Storage::url($documentationImage->path) }}" alt="{{ $documentationImage->alt_text }}">
+                    <img src="{{ route('site-images.show', $documentationImage, false) }}" alt="{{ $documentationImage->alt_text }}">
                     <div class="doc-overlay">
                         <h5><i class="fas fa-circle-check me-2"></i> {{ $documentationImage->title }}</h5>
                     </div>
@@ -1623,7 +1623,7 @@
             @foreach($images->get('gallery', collect()) as $image)
             <div class="col-6 col-md-4 col-lg-3">
                 <div class="gallery-item">
-                    <img src="{{ Storage::url($image->path) }}" alt="{{ $image->alt_text ?: $image->title ?: $settings['site_name'] }}">
+                    <img src="{{ route('site-images.show', $image, false) }}" alt="{{ $image->alt_text ?: $image->title ?: $settings['site_name'] }}">
                 </div>
             </div>
             @endforeach

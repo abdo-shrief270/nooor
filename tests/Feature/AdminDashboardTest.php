@@ -106,6 +106,10 @@ class AdminDashboardTest extends TestCase
         Storage::disk('public')->assertExists('site-images/hero/1.jpeg');
         Storage::disk('public')->assertExists('site-images/hero/5.jpeg');
         Storage::disk('public')->assertExists('site-images/gallery/30.JPG');
+        $firstHeroImage = SiteImage::query()->where('group', 'hero')->orderBy('sort_order')->firstOrFail();
+        $this->get(route('site-images.show', $firstHeroImage))
+            ->assertOk()
+            ->assertHeader('cache-control', 'max-age=86400, public');
         $response = $this->get('/')
             ->assertOk()
             ->assertSee('مؤسسة نور البخاري')
@@ -113,6 +117,7 @@ class AdminDashboardTest extends TestCase
             ->assertSee('data-countdown-to="1847"', false)
             ->assertSee('data-countdown-to="1500"', false)
             ->assertSee('50.0%')
+            ->assertSee(route('site-images.show', $firstHeroImage, false), false)
             ->assertSee('تم وقف 1,153')
             ->assertSee('38.4%')
             ->assertSee('hero-campaign-overlay')

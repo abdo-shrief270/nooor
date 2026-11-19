@@ -168,8 +168,9 @@ class SiteContentSeeder extends Seeder
             throw new RuntimeException("Missing source image: {$image['source']}");
         }
 
-        if (! Storage::disk('public')->exists($image['path'])) {
-            Storage::disk('public')->put($image['path'], File::get($image['source']));
+        if (! Storage::disk('public')->exists($image['path'])
+            && ! Storage::disk('public')->put($image['path'], File::get($image['source']))) {
+            throw new RuntimeException("Unable to write seeded image: {$image['path']}");
         }
 
         unset($image['source']);

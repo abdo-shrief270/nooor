@@ -75,7 +75,7 @@
         <div class="grid media-grid">
             @foreach($items as $image)
                 <div class="card media-card">
-                    <img src="{{ Storage::url($image->path) }}" alt="{{ $image->alt_text }}">
+                    <img src="{{ route('site-images.show', $image, false) }}" alt="{{ $image->alt_text }}">
                     <div class="media-body">
                         <div class="media-meta">
                             <span>#{{ $image->sort_order }}</span>
