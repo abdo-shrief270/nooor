@@ -92,6 +92,22 @@ class AdminDashboardTest extends TestCase
         $this->assertSame(43, SiteImage::query()->count());
         Storage::disk('public')->assertExists('site-images/hero/main_slider_1.jpeg');
         Storage::disk('public')->assertExists('site-images/gallery/30.JPG');
-        $this->get('/')->assertOk()->assertSee('مؤسسة نور البخاري')->assertSee('01055201766');
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('مؤسسة نور البخاري')
+            ->assertSee('01055201766')
+            ->assertSee('data-countdown-to="1847"', false)
+            ->assertSee('تم وقف 1,153')
+            ->assertSee('38.4%');
+
+        SiteSetting::query()->where('key', 'campaign_convoys_goal')->update(['value' => '1000']);
+        SiteSetting::query()->where('key', 'campaign_convoys_completed')->update(['value' => '250']);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('تجهيز القوافل الإغاثية')
+            ->assertSee('data-countdown-to="750"', false)
+            ->assertSee('تم إنجاز 250')
+            ->assertSee('25.0%');
     }
 }

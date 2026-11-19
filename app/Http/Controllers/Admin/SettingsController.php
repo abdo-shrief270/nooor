@@ -12,7 +12,13 @@ class SettingsController extends Controller
 {
     public function __construct(private readonly SiteContentService $content) {}
 
-    public function edit(): View { return view('admin.settings', ['settings' => $this->content->all()]); }
+    public function edit(): View
+    {
+        return view('admin.settings', [
+            'settings' => $this->content->all(),
+            'activityCampaigns' => SiteContentService::ACTIVITY_CAMPAIGNS,
+        ]);
+    }
 
     public function update(UpdateSettingsRequest $request): RedirectResponse
     {

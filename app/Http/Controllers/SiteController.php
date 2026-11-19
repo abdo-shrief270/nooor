@@ -15,8 +15,12 @@ class SiteController extends Controller
 
     public function home(): View
     {
+        $settings = $this->content->all();
+
         return view('index', [
-            'settings' => $this->content->all(),
+            'settings' => $settings,
+            'palmCampaign' => $this->content->palmCampaign($settings),
+            'activityCampaigns' => $this->content->activityCampaigns($settings),
             'images' => $this->images(),
             'donationMethods' => Schema::hasTable('donation_methods') ? DonationMethod::query()->visible()->get() : collect(),
         ]);

@@ -454,7 +454,7 @@
             background: linear-gradient(90deg, var(--primary-dark), var(--primary));
             transition: width 1.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .palm-card-progress-bar.is-visible { width: 38.4%; }
+        .palm-card-progress-bar.is-visible { width: var(--palm-progress, 0%); }
         .palm-card-meta {
             display: flex; justify-content: space-between;
             color: #64748b; font-size: 0.7rem; font-weight: 800;
@@ -1294,60 +1294,68 @@
         </div>
 
         <div class="row g-4">
-            @php
-                $projects = [
-                    ['تجهيز القوافل الإغاثية', 'fa-truck-moving', 'تجهيز قوافل شاملة للمواد الغذائية، الخيام، البطانيات، والاحتياجات الأساسية.', 11],
-                    ['سقيا الماء يومياً', 'fa-droplet', 'مياه عذبة ونقية تصل إلى المستحقين يومياً في مختلف المناطق المتضررة.', 12],
-                    ['تكيات الإطعام', 'fa-utensils', 'إعداد وتوزيع الوجبات الساخنة يومياً للأسر النازحة والمتضررة.', 13],
-                    ['الطرود الغذائية', 'fa-box', 'توزيع طرود غذائية متكاملة تسد احتياجات الأسر لفترات مستدامة.', 14],
-                ];
-                $projectImages = $images->get('projects', collect())->values();
-            @endphp
+            @php $projectImages = $images->get('projects', collect())->values(); @endphp
             @if($projectImages->get(0))
             <div class="col-md-6 col-lg-3 mx-auto">
-                <article class="activity-card-photo palm-activity-card" id="palm-endowment" data-palm-campaign>
+                <article class="activity-card-photo palm-activity-card" id="palm-endowment" data-campaign>
                     <div class="photo-wrap">
                         @php $palmImage = $projectImages->get(0); @endphp
                         <img src="{{ Storage::url($palmImage->path) }}" alt="{{ $palmImage->alt_text }}">
-                        <span class="palm-card-status">الحملة مستمرة</span>
+                        <span class="palm-card-status">{{ $settings['palm_campaign_status'] }}</span>
                         <div class="photo-icon"><i class="fas fa-tree"></i></div>
                     </div>
                     <div class="body">
-                        <h4>مشروع العمر (وقف النخيل)</h4>
-                        <p>ساهم في غرس نخلة كصدقة جارية لك أو لمن تحب، بهدف الوصول إلى 3000 نخلة.</p>
+                        <h4>{{ $settings['palm_campaign_title'] }}</h4>
+                        <p>{{ $settings['palm_campaign_description'] }}</p>
                         <div class="palm-card-counter">
-                            <span class="palm-card-counter-label">المتبقي من هدف 3,000 نخلة</span>
+                            <span class="palm-card-counter-label">المتبقي من هدف {{ number_format($palmCampaign['goal']) }} {{ $settings['palm_campaign_unit'] }}</span>
                             <div class="palm-card-count" aria-live="polite">
-                                <strong data-countdown-from="3000" data-countdown-to="1847">3,000</strong>
-                                <span>نخلة</span>
+                                <strong data-countdown-from="{{ $palmCampaign['goal'] }}" data-countdown-to="{{ $palmCampaign['remaining'] }}">{{ number_format($palmCampaign['goal']) }}</strong>
+                                <span>{{ $settings['palm_campaign_unit'] }}</span>
                             </div>
                         </div>
-                        <div class="palm-card-progress" role="progressbar" aria-label="نسبة اكتمال حملة وقف النخيل" aria-valuemin="0" aria-valuemax="3000" aria-valuenow="1153">
-                            <div class="palm-card-progress-bar"></div>
+                        <div class="palm-card-progress" role="progressbar" aria-label="نسبة اكتمال حملة وقف النخيل" aria-valuemin="0" aria-valuemax="{{ $palmCampaign['goal'] }}" aria-valuenow="{{ $palmCampaign['completed'] }}">
+                            <div class="palm-card-progress-bar" style="--palm-progress: {{ $palmCampaign['percentage'] }}%"></div>
                         </div>
                         <div class="palm-card-meta">
-                            <span>تم وقف 1,153</span>
-                            <span>38.4%</span>
+                            <span>تم وقف {{ number_format($palmCampaign['completed']) }}</span>
+                            <span>{{ number_format($palmCampaign['percentage'], 1) }}%</span>
                         </div>
-                        <a href="#donations" class="palm-card-btn"><i class="fas fa-hand-holding-heart"></i> تبرع الآن</a>
+                        <a href="#donations" class="palm-card-btn"><i class="fas fa-hand-holding-heart"></i> {{ $settings['palm_campaign_button'] }}</a>
                     </div>
                 </article>
             </div>
             @endif
-            @foreach($projects as $p)
+            @foreach($activityCampaigns as $campaign)
             @if($projectImages->get($loop->iteration))
             <div class="col-md-6 col-lg-3">
-                <div class="activity-card-photo">
+                <article class="activity-card-photo palm-activity-card" data-campaign>
                     <div class="photo-wrap">
                         @php $projectImage = $projectImages->get($loop->iteration); @endphp
                         <img src="{{ Storage::url($projectImage->path) }}" alt="{{ $projectImage->alt_text }}">
-                        <div class="photo-icon"><i class="fas {{ $p[1] }}"></i></div>
+                        <span class="palm-card-status">{{ $campaign['status'] }}</span>
+                        <div class="photo-icon"><i class="fas {{ $campaign['icon'] }}"></i></div>
                     </div>
                     <div class="body">
-                        <h4>{{ $p[0] }}</h4>
-                        <p>{{ $p[2] }}</p>
+                        <h4>{{ $campaign['title'] }}</h4>
+                        <p>{{ $campaign['description'] }}</p>
+                        <div class="palm-card-counter">
+                            <span class="palm-card-counter-label">المتبقي من هدف {{ number_format($campaign['goal']) }} {{ $campaign['unit'] }}</span>
+                            <div class="palm-card-count" aria-live="polite">
+                                <strong data-countdown-from="{{ $campaign['goal'] }}" data-countdown-to="{{ $campaign['remaining'] }}">{{ number_format($campaign['goal']) }}</strong>
+                                <span>{{ $campaign['unit'] }}</span>
+                            </div>
+                        </div>
+                        <div class="palm-card-progress" role="progressbar" aria-label="نسبة اكتمال {{ $campaign['title'] }}" aria-valuemin="0" aria-valuemax="{{ $campaign['goal'] }}" aria-valuenow="{{ $campaign['completed'] }}">
+                            <div class="palm-card-progress-bar" style="--palm-progress: {{ $campaign['percentage'] }}%"></div>
+                        </div>
+                        <div class="palm-card-meta">
+                            <span>تم إنجاز {{ number_format($campaign['completed']) }}</span>
+                            <span>{{ number_format($campaign['percentage'], 1) }}%</span>
+                        </div>
+                        <a href="#donations" class="palm-card-btn"><i class="fas fa-hand-holding-heart"></i> {{ $campaign['button'] }}</a>
                     </div>
-                </div>
+                </article>
             </div>
             @endif
             @endforeach
@@ -1745,26 +1753,25 @@
 
     document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
 
-    // Palm activity card: count down from the full goal to the mocked remaining total.
-    const palmCampaign = document.querySelector('[data-palm-campaign]');
-    if (palmCampaign) {
-        const palmCounter = palmCampaign.querySelector('[data-countdown-to]');
-        const palmProgress = palmCampaign.querySelector('.palm-card-progress-bar');
-        const palmObserver = new IntersectionObserver((entries, observer) => {
+    // Campaign cards: animate remaining totals and progress when they enter the viewport.
+    document.querySelectorAll('[data-campaign]').forEach((campaign) => {
+        const campaignCounter = campaign.querySelector('[data-countdown-to]');
+        const campaignProgress = campaign.querySelector('.palm-card-progress-bar');
+        const campaignObserver = new IntersectionObserver((entries, observer) => {
             if (!entries[0].isIntersecting) return;
 
-            const start = Number(palmCounter.dataset.countdownFrom);
-            const end = Number(palmCounter.dataset.countdownTo);
+            const start = Number(campaignCounter.dataset.countdownFrom);
+            const end = Number(campaignCounter.dataset.countdownTo);
             const duration = 2400;
             const startTime = performance.now();
             const formatter = new Intl.NumberFormat('en-US');
 
-            palmProgress.classList.add('is-visible');
+            campaignProgress.classList.add('is-visible');
 
             function tick(now) {
                 const progress = Math.min((now - startTime) / duration, 1);
                 const eased = 1 - Math.pow(1 - progress, 3);
-                palmCounter.textContent = formatter.format(Math.round(start - ((start - end) * eased)));
+                campaignCounter.textContent = formatter.format(Math.round(start - ((start - end) * eased)));
                 if (progress < 1) requestAnimationFrame(tick);
             }
 
@@ -1772,8 +1779,8 @@
             observer.disconnect();
         }, { threshold: 0.35 });
 
-        palmObserver.observe(palmCampaign);
-    }
+        campaignObserver.observe(campaign);
+    });
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
