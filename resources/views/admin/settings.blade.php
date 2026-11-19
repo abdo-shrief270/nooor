@@ -2,7 +2,7 @@
 @section('title','بيانات الموقع')
 @section('content')
 <div class="page-head"><div><h1>بيانات الموقع</h1><p>تحكم في النصوص الرئيسية، التواصل، أرقام الإنجازات وروابط السوشيال.</p></div></div>
-<form method="POST" action="{{ route('admin.settings.update') }}">@csrf @method('PUT')
+<form method="POST" action="{{ route('admin.settings.update') }}" class="settings-form">@csrf @method('PUT')
     <div class="card"><h2 class="section-title">الهوية والمقدمة</h2><div class="grid form-grid">
         @foreach(['site_name'=>'اسم المؤسسة','site_tagline'=>'الشعار المختصر','hero_title'=>'عنوان الواجهة الرئيسية','hero_subtitle'=>'النص أسفل العنوان'] as $key=>$label)<div class="field {{ $key === 'hero_subtitle' ? 'full' : '' }}"><label>{{ $label }}</label><input name="settings[{{ $key }}]" value="{{ old('settings.'.$key,$settings[$key]) }}"></div>@endforeach
     </div></div>
@@ -37,6 +37,6 @@
     </div></div>
     @endforeach
     <div class="card" style="margin-top:20px"><h2 class="section-title">روابط التواصل الاجتماعي</h2><div class="grid form-grid">@foreach(['facebook_url'=>'Facebook','instagram_url'=>'Instagram','youtube_url'=>'YouTube','tiktok_url'=>'TikTok'] as $key=>$label)<div class="field"><label>{{ $label }}</label><input type="url" name="settings[{{ $key }}]" value="{{ old('settings.'.$key,$settings[$key]) }}" dir="ltr"></div>@endforeach</div></div>
-    <div style="position:sticky;bottom:15px;text-align:left;margin-top:20px"><button class="btn btn-primary" style="box-shadow:0 8px 25px #1686bd55"><i class="fas fa-floppy-disk"></i>حفظ جميع التغييرات</button></div>
+    <div class="save-bar"><button class="btn btn-primary"><i class="fas fa-floppy-disk"></i>حفظ جميع التغييرات</button></div>
 </form>
 @endsection

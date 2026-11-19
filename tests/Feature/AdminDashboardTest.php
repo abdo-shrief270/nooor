@@ -70,14 +70,23 @@ class AdminDashboardTest extends TestCase
         $this->actingAs($admin)->post('/admin/images', [
             'image' => UploadedFile::fake()->image('hero.jpg', 1200, 800), 'group' => 'hero',
             'title' => 'صورة الواجهة', 'alt_text' => 'عمل ميداني', 'sort_order' => 2, 'is_active' => 1,
+            'counter_enabled' => 1, 'counter_title' => 'حملة تجريبية', 'counter_goal' => 100,
+            'counter_completed' => 50, 'counter_unit' => 'وحدة', 'counter_button' => 'تبرع الآن',
         ])->assertSessionHasNoErrors();
 
         $image = SiteImage::query()->firstOrFail();
         Storage::disk('public')->assertExists($image->path);
         $this->actingAs($admin)->put('/admin/images/'.$image->id, [
             'title' => $image->title, 'alt_text' => $image->alt_text, 'sort_order' => 2,
+            'counter_enabled' => 1, 'counter_title' => 'حملة محدثة', 'counter_goal' => 500,
+            'counter_completed' => 200, 'counter_unit' => 'وحدة', 'counter_button' => 'ساهم الآن',
         ])->assertSessionHasNoErrors();
-        $this->assertFalse($image->fresh()->is_active);
+        $image->refresh();
+        $this->assertFalse($image->is_active);
+        $this->assertTrue($image->counter_enabled);
+        $this->assertSame(500, $image->counter_goal);
+        $this->assertSame(200, $image->counter_completed);
+        $this->assertSame(40.0, $image->counterData()['percentage']);
     }
 
     public function test_site_content_seeder_backfills_current_content_idempotently(): void
@@ -89,16 +98,35 @@ class AdminDashboardTest extends TestCase
 
         $this->assertSame(count(SiteContentService::DEFAULTS), SiteSetting::query()->count());
         $this->assertSame(3, DonationMethod::query()->count());
-        $this->assertSame(43, SiteImage::query()->count());
-        Storage::disk('public')->assertExists('site-images/hero/main_slider_1.jpeg');
+        $this->assertSame(41, SiteImage::query()->count());
+        $this->assertSame(5, SiteImage::query()->where('group', 'hero')->where('is_active', true)->count());
+        SiteImage::query()->where('group', 'hero')->get()->each(
+            fn (SiteImage $image) => $this->assertSame(50.0, $image->counterData()['percentage'])
+        );
+        Storage::disk('public')->assertExists('site-images/hero/1.jpeg');
+        Storage::disk('public')->assertExists('site-images/hero/5.jpeg');
         Storage::disk('public')->assertExists('site-images/gallery/30.JPG');
-        $this->get('/')
+        $response = $this->get('/')
             ->assertOk()
             ->assertSee('مؤسسة نور البخاري')
             ->assertSee('01055201766')
             ->assertSee('data-countdown-to="1847"', false)
+            ->assertSee('data-countdown-to="1500"', false)
+            ->assertSee('50.0%')
             ->assertSee('تم وقف 1,153')
-            ->assertSee('38.4%');
+            ->assertSee('38.4%')
+            ->assertSee('hero-campaign-overlay')
+            ->assertSee('hero-slider-pagination');
+
+        $this->assertSame(5, substr_count($response->getContent(), 'class="hero-campaign-overlay"'));
+
+        $admin = User::factory()->create(['is_admin' => true]);
+        $imagesPage = $this->actingAs($admin)->get('/admin/images')->assertOk()->getContent();
+        $heroSection = '<h2 style="font-size:1.2rem">السلايدر الرئيسي</h2>';
+        $miniSliderSection = '<h2 style="font-size:1.2rem">السلايدر الصغير</h2>';
+        $this->assertLessThan(strpos($imagesPage, $miniSliderSection), strpos($imagesPage, $heroSection));
+        $this->assertSame(5, substr_count($imagesPage, '<summary>تعديل الصورة والعداد</summary>'));
+        $this->assertSame(36, substr_count($imagesPage, '<summary>تعديل الصورة</summary>'));
 
         SiteSetting::query()->where('key', 'campaign_convoys_goal')->update(['value' => '1000']);
         SiteSetting::query()->where('key', 'campaign_convoys_completed')->update(['value' => '250']);

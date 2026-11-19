@@ -67,9 +67,38 @@ class SiteContentSeeder extends Seeder
     private function seedImages(): void
     {
         $images = [];
+        $mainDirectory = public_path('assets/images/main');
+        $mainImages = File::isDirectory($mainDirectory)
+            ? array_values(array_filter(
+                File::files($mainDirectory),
+                fn (\SplFileInfo $file): bool => in_array(strtolower($file->getExtension()), ['jpg', 'jpeg', 'png', 'webp'], true),
+            ))
+            : [];
 
-        for ($i = 1; $i <= 7; $i++) {
-            $images[] = $this->image('hero', "main_slider_{$i}.jpeg", "صورة السلايدر الرئيسي {$i}", 'مؤسسة نور البخاري - عمل ميداني', $i * 10);
+        usort($mainImages, fn (\SplFileInfo $first, \SplFileInfo $second): int => strnatcasecmp($first->getFilename(), $second->getFilename()));
+
+        if (count($mainImages) !== 5) {
+            throw new RuntimeException('The main slider requires exactly five images in public/assets/images/main.');
+        }
+
+        $sliderCounters = [
+            ['title' => 'وقف النخيل', 'goal' => 3000, 'completed' => 1500, 'unit' => 'نخلة'],
+            ['title' => 'تجهيز الخيام داخل غزة', 'goal' => 3000, 'completed' => 1500, 'unit' => 'خيمة'],
+            ['title' => 'الإطعام في السودان', 'goal' => 6000, 'completed' => 3000, 'unit' => 'شخص'],
+            ['title' => 'الإطعام داخل غزة', 'goal' => 20000, 'completed' => 10000, 'unit' => 'شخص'],
+            ['title' => 'كراتين المواد الغذائية داخل مصر', 'goal' => 2500, 'completed' => 1250, 'unit' => 'كرتونة'],
+        ];
+
+        foreach ($mainImages as $index => $file) {
+            $images[] = $this->image(
+                group: 'hero',
+                filename: $file->getFilename(),
+                title: 'صورة السلايدر الرئيسي '.($index + 1),
+                altText: 'مؤسسة نور البخاري - عمل ميداني',
+                sortOrder: ($index + 1) * 10,
+                sourceDirectory: 'main',
+                counter: [...$sliderCounters[$index], 'button' => 'تبرع الآن'],
+            );
         }
 
         for ($i = 1; $i <= 5; $i++) {
@@ -94,27 +123,46 @@ class SiteContentSeeder extends Seeder
             $images[] = $this->image('gallery', "{$i}.JPG", "توثيق ميداني {$i}", 'نور البخاري - توثيق ميداني', ($i - 10) * 10);
         }
 
+        SiteImage::query()->where('group', 'hero')->update(['is_active' => false]);
+
         foreach ($images as $image) {
-            $this->persistImage($image);
+            $this->persistImage($image, $image['group'] === 'hero');
         }
     }
 
-    /** @return array{group:string,source:string,path:string,title:string,alt_text:string,sort_order:int,is_active:bool} */
-    private function image(string $group, string $filename, string $title, string $altText, int $sortOrder): array
+    /**
+     * @param array{title:string,goal:int,completed:int,unit:string,button:string}|null $counter
+     * @return array{group:string,source:string,path:string,title:string,alt_text:string,sort_order:int,is_active:bool,counter_enabled:bool,counter_title:?string,counter_goal:?int,counter_completed:?int,counter_unit:?string,counter_button:?string}
+     */
+    private function image(
+        string $group,
+        string $filename,
+        string $title,
+        string $altText,
+        int $sortOrder,
+        string $sourceDirectory = 'clinic',
+        ?array $counter = null,
+    ): array
     {
         return [
             'group' => $group,
-            'source' => public_path('assets/images/clinic/'.$filename),
+            'source' => public_path("assets/images/{$sourceDirectory}/{$filename}"),
             'path' => "site-images/{$group}/{$filename}",
             'title' => $title,
             'alt_text' => $altText,
             'sort_order' => $sortOrder,
             'is_active' => true,
+            'counter_enabled' => $counter !== null,
+            'counter_title' => $counter['title'] ?? null,
+            'counter_goal' => $counter['goal'] ?? null,
+            'counter_completed' => $counter['completed'] ?? null,
+            'counter_unit' => $counter['unit'] ?? null,
+            'counter_button' => $counter['button'] ?? null,
         ];
     }
 
-    /** @param array{group:string,source:string,path:string,title:string,alt_text:string,sort_order:int,is_active:bool} $image */
-    private function persistImage(array $image): void
+    /** @param array{group:string,source:string,path:string,title:string,alt_text:string,sort_order:int,is_active:bool,counter_enabled:bool,counter_title:?string,counter_goal:?int,counter_completed:?int,counter_unit:?string,counter_button:?string} $image */
+    private function persistImage(array $image, bool $replaceExisting = false): void
     {
         if (! File::isFile($image['source'])) {
             throw new RuntimeException("Missing source image: {$image['source']}");
@@ -126,9 +174,13 @@ class SiteContentSeeder extends Seeder
 
         unset($image['source']);
 
-        SiteImage::query()->firstOrCreate(
-            ['group' => $image['group'], 'path' => $image['path']],
-            $image,
-        );
+        $identity = ['group' => $image['group'], 'path' => $image['path']];
+
+        if ($replaceExisting) {
+            SiteImage::query()->updateOrCreate($identity, $image);
+            return;
+        }
+
+        SiteImage::query()->firstOrCreate($identity, $image);
     }
 }

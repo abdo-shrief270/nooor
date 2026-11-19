@@ -122,46 +122,62 @@
         }
         .hero-main {
             position: relative;
-            min-height: 620px;
-            display: flex;
-            align-items: center;
-            padding: 4rem 0 2.5rem;
+            min-height: 0;
+            display: block;
+            padding: 0;
         }
-        /* لوحة الصورة – الجهة اليمنى، تمتد لحافة الشاشة وتذوب في الخلفية */
-        /* تم تصغير عرض الصورة لتوسيع المساحة البيضاء على اليسار */
         .hero-photo {
-            position: absolute;
-            top: 0; bottom: 0; right: 0;
-            width: 45%;
+            position: relative;
+            width: 100%;
+            height: min(56.25vw, calc(100svh - 125px), 760px);
+            min-height: 320px;
             z-index: 1;
+            background: #dcecf4;
         }
         .hero-photo .swiper-container,
         .hero-photo .swiper-wrapper,
         .hero-photo .swiper-slide { height: 100%; }
+        .hero-photo .swiper-slide { position: relative; }
         .hero-photo .swiper-image {
             width: 100%; height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            display: block;
         }
-        /* ذوبان الحافة اليسرى للصورة داخل خلفية القسم */
-        .hero-photo::before {
-            content: ''; position: absolute; inset: 0;
-            z-index: 2; pointer-events: none;
-            background: linear-gradient(to right, var(--primary-tint) 4%, rgba(236, 245, 248, 0) 45%);
+        .hero-slider-pagination {
+            position: absolute !important; z-index: 6;
+            top: auto !important; bottom: 1.2rem !important;
+            left: 1.2rem !important; right: auto !important;
+            width: auto !important;
         }
-        /* ذوبان الحافة السفلية قبل شريط الإحصائيات */
-        .hero-photo::after {
-            content: ''; position: absolute; inset: 0;
-            z-index: 2; pointer-events: none;
-            background: linear-gradient(to top, var(--primary-tint) 2%, rgba(236, 245, 248, 0) 30%);
+        .hero-slider-pagination .swiper-pagination-bullet {
+            width: 9px; height: 9px; opacity: 0.55; background: #fff;
+            box-shadow: 0 2px 8px rgba(15,23,42,.3);
         }
-        /* ختم الشعار أسفل يمين الصورة */
-        .hero-photo-logo {
-            position: absolute; z-index: 3;
-            bottom: 2rem; right: 2rem;
-            width: 150px;
-            opacity: 0.92;
-            mix-blend-mode: multiply; /* استبدلها بنسخة PNG شفافة للشعار إن توفرت واحذف هذا السطر */
+        .hero-slider-pagination .swiper-pagination-bullet-active {
+            width: 28px; border-radius: 100px; opacity: 1; background: var(--primary);
         }
+        .hero-campaign-overlay {
+            position: absolute; z-index: 5;
+            left: 50%; bottom: 1rem; transform: translateX(-50%);
+            width: min(760px, calc(100% - 8rem));
+            padding: .65rem .8rem;
+            color: #fff; border-radius: 1.25rem;
+            background: linear-gradient(135deg, rgba(8,31,45,.92), rgba(29,106,152,.88));
+            border: 1px solid rgba(255,255,255,.22);
+            box-shadow: 0 20px 45px -22px rgba(2,15,25,.8);
+            backdrop-filter: blur(12px);
+        }
+        .hero-campaign-overlay { display: grid; grid-template-columns: 1.2fr auto 1fr auto; align-items: center; gap: .75rem; }
+        .hero-campaign-overlay h3 { color: #fff; font-size: .83rem; margin: 0; }
+        .hero-campaign-overlay .hero-counter-label { color: rgba(255,255,255,.72); font-size: .62rem; font-weight: 800; }
+        .hero-campaign-overlay .hero-counter-value { display: flex; align-items: baseline; gap: .35rem; }
+        .hero-campaign-overlay .hero-counter-value strong { font-size: 1.45rem; line-height: 1; color: #fff; font-weight: 900; }
+        .hero-campaign-overlay .hero-counter-value span { font-size: .65rem; font-weight: 800; }
+        .hero-campaign-overlay .hero-progress-wrap { min-width: 150px; }
+        .hero-campaign-overlay .palm-card-progress { margin: 0 0 .28rem; background: rgba(255,255,255,.22); }
+        .hero-campaign-overlay .palm-card-meta { color: rgba(255,255,255,.78); margin: 0; }
+        .hero-campaign-overlay .palm-card-btn { padding: .5rem .75rem; background: #fff; color: var(--primary-deeper); white-space: nowrap; }
+        .hero-campaign-overlay .palm-card-btn:hover { background: var(--primary); color: #fff; }
         .hero-copy { position: relative; z-index: 4; }
         .hero-copy h1 {
             /* حجم أصغر محسوب بحيث يشغل العنوان سطراً واحداً بكامل عرض العمود */
@@ -248,18 +264,37 @@
             color: #47586f; line-height: 1.6;
         }
 
-        @media (max-width: 1199px) {
-            .hero-photo { width: 42%; }
-        }
         @media (max-width: 991px) {
-            .hero-main { display: block; min-height: auto; padding: 0 0 2.5rem; }
+            .navbar {
+                padding: .55rem 0;
+            }
+            .navbar > .container {
+                flex-wrap: nowrap;
+                gap: .35rem;
+            }
+            .navbar-brand {
+                flex: 0 0 auto;
+                margin: 0;
+            }
+            .navbar-brand img { height: 44px; }
+            .nav-cta-mobile {
+                margin-inline-start: auto;
+                gap: .35rem !important;
+                min-width: 0;
+            }
+            .navbar-toggler {
+                flex: 0 0 auto;
+                padding: .45rem;
+            }
             .hero-photo {
                 position: relative;
-                width: 100%; height: 340px;
-                margin-bottom: 2rem;
+                width: 100%;
+                height: min(56.25vw, calc(100svh - 60px));
+                min-height: 0;
+                margin-bottom: 0;
             }
-            .hero-photo::before { display: none; }
-            .hero-photo-logo { width: 96px; bottom: 1rem; right: 1rem; }
+            .hero-campaign-overlay { width: calc(100% - 5rem); grid-template-columns: 1fr auto auto; }
+            .hero-campaign-overlay .hero-progress-wrap { display: none; }
             .hero-stats {
                 grid-template-columns: repeat(2, 1fr);
                 row-gap: 1.5rem;
@@ -272,6 +307,45 @@
                 border-bottom: 1px solid var(--slate-200);
             }
             .hero-stats-wrap { padding-bottom: 3rem; }
+        }
+        @media (max-width: 575px) {
+            .navbar { padding: .4rem 0; }
+            .navbar-brand img { height: 40px; }
+            .nav-cta-sm { padding: .4rem .6rem !important; font-size: .68rem !important; }
+            .hero-photo {
+                --mobile-panel-height: 106px;
+                height: calc(min(56.25vw, calc(100svh - 60px)) + var(--mobile-panel-height));
+            }
+            .hero-photo .swiper-image {
+                height: calc(100% - var(--mobile-panel-height));
+                object-position: center top;
+            }
+            .hero-campaign-overlay { width: calc(100% - 1rem); bottom: .2rem; padding: .4rem .5rem; gap: .35rem .4rem; grid-template-columns: minmax(0, 1fr) auto; border-radius: .75rem; }
+            .hero-campaign-overlay h3 { overflow: hidden; font-size: .64rem; text-overflow: ellipsis; white-space: nowrap; }
+            .hero-campaign-overlay .hero-counter-label { overflow: hidden; font-size: .5rem; text-overflow: ellipsis; white-space: nowrap; }
+            .hero-campaign-overlay .hero-counter-value strong { font-size: 1rem; }
+            .hero-campaign-overlay .hero-counter-value span { font-size: .55rem; }
+            .hero-campaign-overlay .hero-progress-wrap {
+                display: block;
+                grid-column: 1 / -1;
+                justify-self: center;
+                width: min(92%, 290px);
+                margin: .15rem auto 0;
+                text-align: center;
+            }
+            .hero-campaign-overlay .palm-card-progress { height: 5px; margin-bottom: .15rem; }
+            .hero-campaign-overlay .palm-card-meta { justify-content: center; gap: 1rem; font-size: .5rem; line-height: 1.2; }
+            .hero-campaign-overlay .palm-card-btn {
+                display: inline-flex;
+                grid-column: 1 / -1;
+                justify-self: center;
+                align-items: center;
+                justify-content: center;
+                padding: .3rem 1rem;
+                font-size: .65rem;
+                line-height: 1.2;
+            }
+            .hero-slider-pagination { bottom: auto !important; top: .5rem !important; left: .5rem !important; }
         }
 
         /* ===== Section Styling ===== */
@@ -631,10 +705,11 @@
 
         /* ===== Responsive ===== */
         @media (max-width: 991px) {
-            .navbar-brand img { height: 50px; }
+            .navbar-brand img { height: 44px; }
             .navbar-brand h4 { font-size: 1.1rem; }
         }
         @media (max-width: 768px) {
+            .navbar-brand img { height: 40px; }
             .section-title { font-size: 2rem; }
             .cta-box { padding: 3rem 1.5rem; }
             .stat-number { font-size: 2.1rem; }
@@ -875,6 +950,13 @@
         font-size: 0.78rem !important;
         padding: 0.5rem 0.9rem !important;
     }
+    @media (max-width: 575px) {
+        .nav-cta-mobile .nav-cta-donate,
+        .nav-cta-mobile .nav-cta-volunteer {
+            font-size: 0.68rem !important;
+            padding: 0.4rem 0.6rem !important;
+        }
+    }
     @media (max-width: 380px) {
         .nav-cta-sm { padding: 0.5rem 0.65rem !important; font-size: 0; }
         .nav-cta-sm i { font-size: 0.95rem; }
@@ -1097,37 +1179,34 @@
 <!-- ===== Hero Section (light split layout) ===== -->
 <section class="hero-light">
     <div class="hero-main">
+        <h1 class="visually-hidden">{{ $settings['hero_title'] }}</h1>
 
         {{-- لوحة الصورة (سلايدر متلاشي) + ختم الشعار --}}
         <div class="hero-photo">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    @foreach($images->get('hero', collect()) as $image)
-                        <div class="swiper-slide"><img src="{{ Storage::url($image->path) }}" class="swiper-image" alt="{{ $image->alt_text ?: $settings['site_name'] }}"></div>
+                    @foreach($images->get('hero', collect())->take(5) as $image)
+                        @php $slideCampaign = $image->counterData(); @endphp
+                        <div class="swiper-slide">
+                            <img src="{{ Storage::url($image->path) }}" class="swiper-image" alt="{{ $image->alt_text ?: $settings['site_name'] }}">
+                            @if($slideCampaign)
+                            <div class="hero-campaign-overlay" data-campaign>
+                                <div>
+                                    <h3>{{ $slideCampaign['title'] }}</h3>
+                                    <div class="hero-counter-label">المتبقي من هدف {{ number_format($slideCampaign['goal']) }} {{ $slideCampaign['unit'] }}</div>
+                                </div>
+                                <div class="hero-counter-value"><strong data-countdown-from="{{ $slideCampaign['goal'] }}" data-countdown-to="{{ $slideCampaign['remaining'] }}">{{ number_format($slideCampaign['goal']) }}</strong><span>{{ $slideCampaign['unit'] }}</span></div>
+                                <div class="hero-progress-wrap">
+                                    <div class="palm-card-progress" role="progressbar" aria-label="نسبة اكتمال {{ $slideCampaign['title'] }}" aria-valuemin="0" aria-valuemax="{{ $slideCampaign['goal'] }}" aria-valuenow="{{ $slideCampaign['completed'] }}"><div class="palm-card-progress-bar" style="--palm-progress: {{ $slideCampaign['percentage'] }}%"></div></div>
+                                    <div class="palm-card-meta"><span>تم إنجاز {{ number_format($slideCampaign['completed']) }}</span><span>{{ number_format($slideCampaign['percentage'], 1) }}%</span></div>
+                                </div>
+                                <a href="#donations" class="palm-card-btn"><i class="fas fa-hand-holding-heart"></i> {{ $slideCampaign['button'] }}</a>
+                            </div>
+                            @endif
+                        </div>
                     @endforeach
                 </div>
-            </div>
-            <img src="{{ asset('logo.jpg-large-preserve-ratio') }}" alt="شعار مؤسسة نور البخاري" class="hero-photo-logo">
-        </div>
-
-        {{-- النص + السلايدر المصغّر (بديل الأزرار) --}}
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-xl-5 ms-lg-auto hero-copy text-center text-lg-start">
-                    <h1>{{ $settings['hero_title'] }} <i class="fas fa-heart hero-heart"></i></h1>
-                    <p class="hero-lead mx-auto mx-lg-0">{{ $settings['hero_subtitle'] }}</p>
-
-                    {{-- سلايدر صور مصغّر بدلاً من الأزرار --}}
-                    <div class="hero-mini-slider">
-                        <div class="swiper-container hero-mini-swiper">
-                            <div class="swiper-wrapper">
-                                @foreach($images->get('mini_slider', collect()) as $image)
-                                    <div class="swiper-slide"><img src="{{ Storage::url($image->path) }}" alt="{{ $image->alt_text ?: $settings['site_name'] }}"></div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="swiper-pagination hero-slider-pagination"></div>
             </div>
         </div>
     </div>
@@ -1647,7 +1726,8 @@
             loop: true,
             autoplay: { delay: 5000, disableOnInteraction: false },
             effect: 'fade',
-            fadeEffect: { crossFade: true }
+            fadeEffect: { crossFade: true },
+            pagination: { el: '.hero-slider-pagination', clickable: true }
         });
 
         // السلايدر المصغّر — حركة انسيابية مستمرة (الصور بجانب بعضها)
