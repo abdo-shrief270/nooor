@@ -148,22 +148,22 @@
 
                 <h5 class="footer-title">تابعونا على</h5>
                 <div class="footer-social">
-                    <a href="https://share.google/SdSzquhRAD7qeHS8N" target="_blank" rel="noopener" class="social-icon facebook" aria-label="Facebook" title="Facebook">
+                    <a href="{{ $settings['facebook_url'] }}" target="_blank" rel="noopener" class="social-icon facebook" aria-label="Facebook" title="Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="https://www.instagram.com/nourelbukhari?igsh=YWdkcGs5ZHM5ZGxs" target="_blank" rel="noopener" class="social-icon instagram" aria-label="Instagram" title="Instagram">
+                    <a href="{{ $settings['instagram_url'] }}" target="_blank" rel="noopener" class="social-icon instagram" aria-label="Instagram" title="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://youtube.com/@nourelbukhari?si=mI6WDNPsD9yigjpJ" target="_blank" rel="noopener" class="social-icon youtube" aria-label="YouTube" title="YouTube">
+                    <a href="{{ $settings['youtube_url'] }}" target="_blank" rel="noopener" class="social-icon youtube" aria-label="YouTube" title="YouTube">
                         <i class="fab fa-youtube"></i>
                     </a>
-                    <a href="https://www.tiktok.com/@nooralbukhari8?_r=1&_t=ZS-98FJwD5HKyL" target="_blank" rel="noopener" class="social-icon tiktok" aria-label="TikTok" title="TikTok">
+                    <a href="{{ $settings['tiktok_url'] }}" target="_blank" rel="noopener" class="social-icon tiktok" aria-label="TikTok" title="TikTok">
                         <i class="fab fa-tiktok"></i>
                     </a>
-                    <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="social-icon whatsapp" aria-label="WhatsApp" title="WhatsApp">
+                    <a href="https://wa.me/{{ $settings['whatsapp_number'] }}" target="_blank" rel="noopener" class="social-icon whatsapp" aria-label="WhatsApp" title="WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                     </a>
-                    <a href="tel:+201055201766" class="social-icon phone" aria-label="اتصل بنا" title="اتصل بنا">
+                    <a href="tel:{{ $settings['phone_number'] }}" class="social-icon phone" aria-label="اتصل بنا" title="اتصل بنا">
                         <i class="fas fa-phone-alt"></i>
                     </a>
                 </div>
@@ -189,7 +189,7 @@
                 <ul class="footer-info-list">
                     <li>
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>التجمع الخامس – فاليو مول 2 – الدور الثاني، رقم 84، القاهرة</span>
+                        <span>{{ $settings['address'] }}</span>
                     </li>
                     <li>
                         <i class="fas fa-mosque"></i>
@@ -197,11 +197,11 @@
                     </li>
                     <li>
                         <i class="fas fa-phone-alt"></i>
-                        <a href="tel:+201055201766" dir="ltr" class="text-white-50 text-decoration-none">+201055201766</a>
+                        <a href="tel:{{ $settings['phone_number'] }}" dir="ltr" class="text-white-50 text-decoration-none">{{ $settings['phone_number'] }}</a>
                     </li>
                     <li>
                         <i class="fas fa-envelope"></i>
-                        <a href="mailto:Nourelbokhart.eg@gmail.com" class="text-white-50 text-decoration-none">Nourelbokhart.eg@gmail.com</a>
+                        <a href="mailto:{{ $settings['email'] }}" class="text-white-50 text-decoration-none">{{ $settings['email'] }}</a>
                     </li>
                 </ul>
             </div>

@@ -1,3 +1,4 @@
+@php $aboutImages = $images->get('about', collect())->values(); @endphp
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -56,8 +57,8 @@
 
         /* Inner Header */
         .inner-header {
-            background: linear-gradient(135deg, rgba(15,23,42,0.85), rgba(29,106,152,0.85)),
-                        url('{{ asset("assets/images/clinic/12.JPG") }}') center/cover;
+            background: linear-gradient(135deg, rgba(15,23,42,0.85), rgba(29,106,152,0.85))
+                        @if($aboutImages->get(0)), url('{{ Storage::url($aboutImages->get(0)->path) }}') center/cover @endif;
             padding: 8rem 0 6rem;
             color: var(--white);
             text-align: center;
@@ -169,13 +170,13 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex gap-4 align-items-center">
-                <a href="tel:+201055201766" class="d-flex align-items-center gap-2">
+                <a href="tel:{{ $settings['phone_number'] }}" class="d-flex align-items-center gap-2">
                     <i class="fas fa-phone-alt"></i>
-                    <span dir="ltr">+201055201766</span>
+                    <span dir="ltr">{{ $settings['phone_number'] }}</span>
                 </a>
-                <a href="mailto:Nourelbokhart.eg@gmail.com" class="d-flex align-items-center gap-2">
+                <a href="mailto:{{ $settings['email'] }}" class="d-flex align-items-center gap-2">
                     <i class="fas fa-envelope"></i>
-                    Nourelbokhart.eg@gmail.com
+                    {{ $settings['email'] }}
                 </a>
                 <span class="d-flex align-items-center gap-2">
                     <i class="fas fa-map-marker-alt"></i>
@@ -185,10 +186,10 @@
             <div class="d-flex gap-2 align-items-center">
                 <span class="me-2 fw-bold">تابعونا:</span>
                 <a href="https://www.facebook.com/Noor.Albokhary?mibextid=wwXIfr&mibextid=wwXIfr" target="_blank" rel="noopener" class="social-mini" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/nourelbukhari?igsh=MTJsZm10ZDZ4Mmhsdw%3D%3D&utm_source=qr" target="_blank" rel="noopener" class="social-mini" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="{{ $settings['instagram_url'] }}" target="_blank" rel="noopener" class="social-mini" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@NourElBokhary" target="_blank" rel="noopener" class="social-mini" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 <a href="https://www.tiktok.com/@nourelbokhary" target="_blank" rel="noopener" class="social-mini" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="social-mini" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/{{ $settings['whatsapp_number'] }}" target="_blank" rel="noopener" class="social-mini" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </div>
@@ -294,7 +295,7 @@
     <div class="container">
         <div class="row align-items-center g-5">
             <div class="col-lg-6">
-                <img src="{{ asset('assets/images/clinic/15.JPG') }}" class="img-fluid rounded-4 shadow-lg" alt="جهودنا الميدانية">
+                @if($aboutImages->get(1))<img src="{{ Storage::url($aboutImages->get(1)->path) }}" class="img-fluid rounded-4 shadow-lg" alt="{{ $aboutImages->get(1)->alt_text }}">@endif
             </div>
             <div class="col-lg-6 ps-lg-5">
                 <h2 class="mb-4">لماذا مؤسسة نور البخاري؟</h2>
@@ -346,7 +347,7 @@
 <!-- Floating Buttons -->
 <div class="floating-actions">
     <a href="/#donations" class="floating-btn donate" aria-label="تبرع الآن"><i class="fas fa-hand-holding-heart"></i></a>
-    <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="floating-btn whatsapp" aria-label="واتساب"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/{{ $settings['whatsapp_number'] }}" target="_blank" rel="noopener" class="floating-btn whatsapp" aria-label="واتساب"><i class="fab fa-whatsapp"></i></a>
 </div>
 
 @include('partials.footer')

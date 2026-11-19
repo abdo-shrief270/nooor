@@ -135,9 +135,9 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex gap-4 align-items-center">
-                <a href="tel:+201055201766" class="d-flex align-items-center gap-2">
+                <a href="tel:{{ $settings['phone_number'] }}" class="d-flex align-items-center gap-2">
                     <i class="fas fa-phone-alt"></i>
-                    <span dir="ltr">+201055201766</span>
+                    <span dir="ltr">{{ $settings['phone_number'] }}</span>
                 </a>
                 <a href="mailto:Nourelbokhart.eg@gmail.com" class="d-flex align-items-center gap-2">
                     <i class="fas fa-envelope"></i>
@@ -154,7 +154,7 @@
                 <a href="https://www.instagram.com/nourelbukhari?igsh=MTJsZm10ZDZ4Mmhsdw%3D%3D&utm_source=qr" target="_blank" rel="noopener" class="social-mini" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@NourElBokhary" target="_blank" rel="noopener" class="social-mini" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 <a href="https://www.tiktok.com/@nourelbokhary" target="_blank" rel="noopener" class="social-mini" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="social-mini" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/{{ $settings['whatsapp_number'] }}" target="_blank" rel="noopener" class="social-mini" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </div>
@@ -224,8 +224,8 @@
             <h4 class="mt-0 mb-3"><i class="fas fa-headset text-primary"></i> للتواصل والاستفسار</h4>
             <p class="mb-3">للمزيد من الاستفسارات، يمكنكم التواصل معنا عبر:</p>
             <div class="d-flex flex-wrap gap-3">
-                <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="btn-luxury" style="background: #25d366;">
-                    <i class="fab fa-whatsapp"></i> واتساب: <span dir="ltr">+201055201766</span>
+                <a href="https://wa.me/{{ $settings['whatsapp_number'] }}" target="_blank" rel="noopener" class="btn-luxury" style="background: #25d366;">
+                    <i class="fab fa-whatsapp"></i> واتساب: <span dir="ltr">{{ $settings['phone_number'] }}</span>
                 </a>
                 <a href="mailto:Nourelbokhart.eg@gmail.com" class="btn-luxury">
                     <i class="fas fa-envelope"></i> البريد الإلكتروني
@@ -238,7 +238,7 @@
 <!-- Floating Buttons -->
 <div class="floating-actions">
     <a href="/#donations" class="floating-btn donate" aria-label="تبرع الآن"><i class="fas fa-hand-holding-heart"></i></a>
-    <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="floating-btn whatsapp" aria-label="واتساب"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/{{ $settings['whatsapp_number'] }}" target="_blank" rel="noopener" class="floating-btn whatsapp" aria-label="واتساب"><i class="fab fa-whatsapp"></i></a>
 </div>
 
 @include('partials.footer')

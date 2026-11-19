@@ -1023,13 +1023,13 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex gap-4 align-items-center">
-                <a href="tel:+201055201766" class="d-flex align-items-center gap-2">
+                <a href="tel:{{ $settings['phone_number'] }}" class="d-flex align-items-center gap-2">
                     <i class="fas fa-phone-alt"></i>
-                    <span dir="ltr">+201055201766</span>
+                    <span dir="ltr">{{ $settings['phone_number'] }}</span>
                 </a>
-                <a href="mailto:Nourelbokhart.eg@gmail.com" class="d-flex align-items-center gap-2">
+                <a href="mailto:{{ $settings['email'] }}" class="d-flex align-items-center gap-2">
                     <i class="fas fa-envelope"></i>
-                    Nourelbokhart.eg@gmail.com
+                    {{ $settings['email'] }}
                 </a>
                 <span class="d-flex align-items-center gap-2">
                     <i class="fas fa-map-marker-alt"></i>
@@ -1038,11 +1038,11 @@
             </div>
             <div class="d-flex gap-2 align-items-center">
                 <span class="me-2 fw-bold">تابعونا:</span>
-                <a href="https://share.google/SdSzquhRAD7qeHS8N" target="_blank" rel="noopener" class="social-mini" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/nourelbukhari?igsh=YWdkcGs5ZHM5ZGxs" target="_blank" rel="noopener" class="social-mini" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://youtube.com/@nourelbukhari?si=mI6WDNPsD9yigjpJ" target="_blank" rel="noopener" class="social-mini" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.tiktok.com/@nooralbukhari8?_r=1&_t=ZS-98FJwD5HKyL" target="_blank" rel="noopener" class="social-mini" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="social-mini" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="{{ $settings['facebook_url'] }}" target="_blank" rel="noopener" class="social-mini" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="{{ $settings['instagram_url'] }}" target="_blank" rel="noopener" class="social-mini" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="{{ $settings['youtube_url'] }}" target="_blank" rel="noopener" class="social-mini" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="{{ $settings['tiktok_url'] }}" target="_blank" rel="noopener" class="social-mini" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/{{ $settings['whatsapp_number'] }}" target="_blank" rel="noopener" class="social-mini" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </div>
@@ -1102,9 +1102,9 @@
         <div class="hero-photo">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    @for($i=1; $i<=7; $i++)
-                        <div class="swiper-slide"><img src="{{ asset('assets/images/clinic/main_slider_'.$i.'.jpeg') }}" class="swiper-image" alt="مؤسسة نور البخاري - عمل ميداني"></div>
-                    @endfor
+                    @foreach($images->get('hero', collect()) as $image)
+                        <div class="swiper-slide"><img src="{{ Storage::url($image->path) }}" class="swiper-image" alt="{{ $image->alt_text ?: $settings['site_name'] }}"></div>
+                    @endforeach
                 </div>
             </div>
             <img src="{{ asset('logo.jpg-large-preserve-ratio') }}" alt="شعار مؤسسة نور البخاري" class="hero-photo-logo">
@@ -1114,18 +1114,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-xl-5 ms-lg-auto hero-copy text-center text-lg-start">
-                    <h1>الخير لا يعرف حدود <i class="fas fa-heart hero-heart"></i></h1>
-                    <p class="hero-lead mx-auto mx-lg-0">معاً نصنع أثراً في حياة المحتاجين في غزة والسودان ومصر.</p>
+                    <h1>{{ $settings['hero_title'] }} <i class="fas fa-heart hero-heart"></i></h1>
+                    <p class="hero-lead mx-auto mx-lg-0">{{ $settings['hero_subtitle'] }}</p>
 
                     {{-- سلايدر صور مصغّر بدلاً من الأزرار --}}
                     <div class="hero-mini-slider">
                         <div class="swiper-container hero-mini-swiper">
                             <div class="swiper-wrapper">
-                                @for($i=1; $i<=5; $i++)
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('assets/images/clinic/slider_'.$i.'.png') }}" alt="مؤسسة نور البخاري - لقطات ميدانية">
-                                    </div>
-                                @endfor
+                                @foreach($images->get('mini_slider', collect()) as $image)
+                                    <div class="swiper-slide"><img src="{{ Storage::url($image->path) }}" alt="{{ $image->alt_text ?: $settings['site_name'] }}"></div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -1144,22 +1142,22 @@
             </div>
             <div class="hero-stat">
                 <div class="hero-stat-icon"><i class="fas fa-droplet"></i></div>
-                <div class="hero-stat-num" dir="ltr"><span data-count="1000" data-latin data-suffix="+">0+</span></div>
+                <div class="hero-stat-num" dir="ltr"><span data-count="{{ $settings['hero_water_connections'] }}" data-latin data-suffix="+">0+</span></div>
                 <div class="hero-stat-label">وصلة مياه<br>صدقة جارية</div>
             </div>
             <div class="hero-stat">
                 <div class="hero-stat-icon"><i class="fas fa-campground"></i></div>
-                <div class="hero-stat-num" dir="ltr"><span data-count="15000" data-latin data-suffix="+">0+</span></div>
+                <div class="hero-stat-num" dir="ltr"><span data-count="{{ $settings['hero_tents'] }}" data-latin data-suffix="+">0+</span></div>
                 <div class="hero-stat-label">خيمة<br>تم توزيعها</div>
             </div>
             <div class="hero-stat">
                 <div class="hero-stat-icon"><i class="fas fa-utensils"></i></div>
-                <div class="hero-stat-num" dir="ltr"><span data-count="700000" data-latin data-suffix="+">0+</span></div>
+                <div class="hero-stat-num" dir="ltr"><span data-count="{{ $settings['hero_meals'] }}" data-latin data-suffix="+">0+</span></div>
                 <div class="hero-stat-label">وجبة غذائية<br>تم توزيعها</div>
             </div>
             <div class="hero-stat">
                 <div class="hero-stat-icon"><i class="fas fa-house"></i></div>
-                <div class="hero-stat-num" dir="ltr"><span data-count="800" data-latin data-suffix="+">0+</span></div>
+                <div class="hero-stat-num" dir="ltr"><span data-count="{{ $settings['hero_restored_tents'] }}" data-latin data-suffix="+">0+</span></div>
                 <div class="hero-stat-label">خيمة تم ترميمها<br>وتأهيلها</div>
             </div>
         </div>
@@ -1221,7 +1219,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="stat-card">
                     <div class="stat-icon-wrap"><i class="fas fa-utensils"></i></div>
-                    <div class="stat-number" data-count="730000">0</div>
+                    <div class="stat-number" data-count="{{ $settings['stat_meals'] }}">0</div>
                     <div class="stat-label">وجبة ساخنة سنوياً</div>
                     <div class="stat-sub">عبر تكيات الإطعام</div>
                 </div>
@@ -1229,7 +1227,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="stat-card">
                     <div class="stat-icon-wrap"><i class="fas fa-droplet"></i></div>
-                    <div class="stat-number" data-count="5475000">0</div>
+                    <div class="stat-number" data-count="{{ $settings['stat_water'] }}">0</div>
                     <div class="stat-label">متر مكعب مياه</div>
                     <div class="stat-sub">سقيا ماء يومية</div>
                 </div>
@@ -1237,7 +1235,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="stat-card">
                     <div class="stat-icon-wrap"><i class="fas fa-box"></i></div>
-                    <div class="stat-number" data-count="60000">0</div>
+                    <div class="stat-number" data-count="{{ $settings['stat_food_boxes'] }}">0</div>
                     <div class="stat-label">كرتونة غذائية</div>
                     <div class="stat-sub">طرود متكاملة للأسر</div>
                 </div>
@@ -1245,7 +1243,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="stat-card">
                     <div class="stat-icon-wrap"><i class="fas fa-wheat-awn"></i></div>
-                    <div class="stat-number" data-count="1350000">0</div>
+                    <div class="stat-number" data-count="{{ $settings['stat_flour'] }}">0</div>
                     <div class="stat-label">كجم دقيق وبقوليات</div>
                     <div class="stat-sub">للأسر الأكثر احتياجاً</div>
                 </div>
@@ -1253,7 +1251,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="stat-card">
                     <div class="stat-icon-wrap"><i class="fas fa-bed"></i></div>
-                    <div class="stat-number" data-count="30000">0</div>
+                    <div class="stat-number" data-count="{{ $settings['stat_blankets'] }}">0</div>
                     <div class="stat-label">بطانية</div>
                     <div class="stat-sub">للحماية من البرد القارس</div>
                 </div>
@@ -1261,7 +1259,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="stat-card">
                     <div class="stat-icon-wrap"><i class="fas fa-campground"></i></div>
-                    <div class="stat-number" data-count="3500">0</div>
+                    <div class="stat-number" data-count="{{ $settings['stat_tents'] }}">0</div>
                     <div class="stat-label">خيمة</div>
                     <div class="stat-sub">+ ترميم 800 خيمة إضافية</div>
                 </div>
@@ -1269,7 +1267,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="stat-card">
                     <div class="stat-icon-wrap"><i class="fas fa-truck-moving"></i></div>
-                    <div class="stat-number" data-count="798">0</div>
+                    <div class="stat-number" data-count="{{ $settings['stat_convoys'] }}">0</div>
                     <div class="stat-label">قافلة إغاثية</div>
                     <div class="stat-sub">غذاء وخيام وملابس ومستلزمات طبية</div>
                 </div>
@@ -1303,11 +1301,14 @@
                     ['تكيات الإطعام', 'fa-utensils', 'إعداد وتوزيع الوجبات الساخنة يومياً للأسر النازحة والمتضررة.', 13],
                     ['الطرود الغذائية', 'fa-box', 'توزيع طرود غذائية متكاملة تسد احتياجات الأسر لفترات مستدامة.', 14],
                 ];
+                $projectImages = $images->get('projects', collect())->values();
             @endphp
+            @if($projectImages->get(0))
             <div class="col-md-6 col-lg-3 mx-auto">
                 <article class="activity-card-photo palm-activity-card" id="palm-endowment" data-palm-campaign>
                     <div class="photo-wrap">
-                        <img src="{{ asset('assets/images/clinic/19.JPG') }}" alt="مشروع العمر - وقف النخيل">
+                        @php $palmImage = $projectImages->get(0); @endphp
+                        <img src="{{ Storage::url($palmImage->path) }}" alt="{{ $palmImage->alt_text }}">
                         <span class="palm-card-status">الحملة مستمرة</span>
                         <div class="photo-icon"><i class="fas fa-tree"></i></div>
                     </div>
@@ -1332,11 +1333,14 @@
                     </div>
                 </article>
             </div>
+            @endif
             @foreach($projects as $p)
+            @if($projectImages->get($loop->iteration))
             <div class="col-md-6 col-lg-3">
                 <div class="activity-card-photo">
                     <div class="photo-wrap">
-                        <img src="{{ asset('assets/images/clinic/'.$p[3].'.JPG') }}" alt="{{ $p[0] }}">
+                        @php $projectImage = $projectImages->get($loop->iteration); @endphp
+                        <img src="{{ Storage::url($projectImage->path) }}" alt="{{ $projectImage->alt_text }}">
                         <div class="photo-icon"><i class="fas {{ $p[1] }}"></i></div>
                     </div>
                     <div class="body">
@@ -1345,6 +1349,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             @endforeach
         </div>
     </div>
@@ -1356,8 +1361,8 @@
         {{-- Header --}}
         <div class="donate-head text-center">
             <div class="donate-head-icon"><i class="fas fa-hand-holding-heart"></i></div>
-            <h2 class="section-title">طرق التبرع</h2>
-            <p class="donate-head-sub">اختر وسيلة الدفع المناسبة لإتمام التبرع بسهولة وأمان</p>
+            <h2 class="section-title">{{ $settings['donation_title'] }}</h2>
+            <p class="donate-head-sub">{{ $settings['donation_subtitle'] }}</p>
         </div>
 
         {{-- داخل / خارج مصر --}}
@@ -1385,117 +1390,13 @@
             <div class="tab-pane fade show active" id="scope-inside" role="tabpanel">
                 {{-- انستا والمحافظ الإلكترونية --}}
                 <div class="pay-list">
-
-                            {{-- InstaPay — Account 1 --}}
-                            <div class="pay-row brand-instapay">
-                                <div class="pay-logo">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/InstaPay_Logo.png" alt="InstaPay">
-                                </div>
-                                <div class="pay-info">
-                                    <span class="pay-badge">حساب InstaPay</span>
-                                    <div class="pay-id">noor...albokhre@instapay</div>
-                                    <p class="pay-desc">انسخ المعرف واستخدمه في تطبيق InstaPay</p>
-                                </div>
-                                <div class="pay-actions">
-                                    <button type="button" class="pay-btn pay-btn-copy"
-                                            onclick="copyId('noor...albokhre@instapay', this)">
-                                        نسخ <i class="far fa-copy"></i>
-                                    </button>
-                                    <a href="https://ipn.eg/S/noor...albokhre/instapay/9P4iwx"
-                                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
-                                        تحويل الآن <i class="fas fa-arrow-left"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!--{{-- InstaPay — Account 2 --}}-->
-                            <!--<div class="pay-row brand-instapay">-->
-                            <!--    <div class="pay-logo">-->
-                            <!--        <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/InstaPay_Logo.png" alt="InstaPay">-->
-                            <!--    </div>-->
-                            <!--    <div class="pay-info">-->
-                            <!--        <span class="pay-badge">حساب InstaPay</span>-->
-                            <!--        <div class="pay-id">husseinabdellatif.eg@instapay</div>-->
-                            <!--        <p class="pay-desc">انسخ المعرف واستخدمه في تطبيق InstaPay</p>-->
-                            <!--    </div>-->
-                            <!--    <div class="pay-actions">-->
-                            <!--        <button type="button" class="pay-btn pay-btn-copy"-->
-                            <!--                onclick="copyId('husseinabdellatif.eg@instapay', this)">-->
-                            <!--            نسخ <i class="far fa-copy"></i>-->
-                            <!--        </button>-->
-                            <!--        <a href="https://ipn.eg/S/husseinabdellatif.eg/instapay/4SGbFV"-->
-                            <!--           target="_blank" rel="noopener" class="pay-btn pay-btn-go">-->
-                            <!--            تحويل الآن <i class="fas fa-arrow-left"></i>-->
-                            <!--        </a>-->
-                            <!--    </div>-->
-                            <!--</div>-->
-
-                            {{-- Etisalat Cash --}}
-                            <div class="pay-row brand-etisalat">
-                                <div class="pay-logo">
-                                    <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
-                                </div>
-                                <div class="pay-info">
-                                    <span class="pay-badge">Etisalat Cash</span>
-                                    <div class="pay-id">01151580439</div>
-                                    <p class="pay-desc">انسخ الرقم واستخدمه في تطبيق اتصالات كاش</p>
-                                </div>
-                                <div class="pay-actions">
-                                    <button type="button" class="pay-btn pay-btn-copy"
-                                            onclick="copyId('01151580439', this)">
-                                        نسخ الرقم <i class="far fa-copy"></i>
-                                    </button>
-                                    <a href="https://app.etisalat.eg/?appScreens=cash&appScreen=cash&extra=screenId:send_money;dial:01151580439"
-                                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
-                                        تحويل الآن <i class="fas fa-arrow-left"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            {{-- Vodafone Cash — Account 1 --}}
-                            <!--<div class="pay-row brand-vodafone">-->
-                            <!--    <div class="pay-logo">-->
-                            <!--        <i class="fas fa-mobile-screen-button pay-logo-ic"></i>-->
-                            <!--    </div>-->
-                            <!--    <div class="pay-info">-->
-                            <!--        <span class="pay-badge">Vodafone Cash — الحساب الأول</span>-->
-                            <!--        <div class="pay-id">01062720072</div>-->
-                            <!--        <p class="pay-desc">انسخ الرقم واستخدمه في تطبيق فودافون كاش</p>-->
-                            <!--    </div>-->
-                            <!--    <div class="pay-actions">-->
-                            <!--        <button type="button" class="pay-btn pay-btn-copy"-->
-                            <!--                onclick="copyId('01062720072', this)">-->
-                            <!--            نسخ الرقم <i class="far fa-copy"></i>-->
-                            <!--        </button>-->
-                            <!--        <a href="https://vf.eg/vfcash?id=mt&qrId=Z3zC5u"-->
-                            <!--           target="_blank" rel="noopener" class="pay-btn pay-btn-go">-->
-                            <!--            تحويل الآن <i class="fas fa-arrow-left"></i>-->
-                            <!--        </a>-->
-                            <!--    </div>-->
-                            <!--</div>-->
-
-                            <!--{{-- Vodafone Cash — Account 2 --}}-->
-                            <div class="pay-row brand-vodafone">
-                                <div class="pay-logo">
-                                    <i class="fas fa-mobile-screen-button pay-logo-ic"></i>
-                                </div>
-                                <div class="pay-info">
-                                    <span class="pay-badge">Vodafone Cash</span>
-                                    <div class="pay-id">01055201766</div>
-                                    <p class="pay-desc">انسخ الرقم واستخدمه في تطبيق فودافون كاش</p>
-                                </div>
-                                <div class="pay-actions">
-                                    <button type="button" class="pay-btn pay-btn-copy"
-                                            onclick="copyId('01055201766', this)">
-                                        نسخ الرقم <i class="far fa-copy"></i>
-                                    </button>
-                                    <a href="https://vf.eg/vfcash?id=mt&qrId=76r1GS"
-                                       target="_blank" rel="noopener" class="pay-btn pay-btn-go">
-                                        تحويل الآن <i class="fas fa-arrow-left"></i>
-                                    </a>
-                                </div>
-                            </div>
-
+                    @foreach($donationMethods as $method)
+                        <div class="pay-row brand-{{ $method->type }}">
+                            <div class="pay-logo"><i class="fas {{ $method->type === 'bank' ? 'fa-building-columns' : 'fa-mobile-screen-button' }} pay-logo-ic"></i></div>
+                            <div class="pay-info"><span class="pay-badge">{{ $method->name }}</span><div class="pay-id">{{ $method->identifier }}</div><p class="pay-desc">{{ $method->description }}</p></div>
+                            <div class="pay-actions"><button type="button" class="pay-btn pay-btn-copy" onclick='copyId(@json($method->identifier), this)'>نسخ <i class="far fa-copy"></i></button>@if($method->action_url)<a href="{{ $method->action_url }}" target="_blank" rel="noopener" class="pay-btn pay-btn-go">تحويل الآن <i class="fas fa-arrow-left"></i></a>@endif</div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -1506,7 +1407,7 @@
                                 <div class="agent-donate-icon"><i class="fas fa-box-open"></i></div>
                                 <h5>تبرع عيني</h5>
                                 <p>ملابس، بطاطين، مواد غذائية أو أي مستلزمات عينية — يقوم مندوبنا باستلامها منك مباشرة في الموعد المناسب لك.</p>
-                                <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="btn btn-luxury w-100">
+                                <a href="https://wa.me/{{ $settings['whatsapp_number'] }}" target="_blank" rel="noopener" class="btn btn-luxury w-100">
                                     <i class="fab fa-whatsapp"></i> تنسيق الاستلام عبر واتساب
                                 </a>
                             </div>
@@ -1514,7 +1415,7 @@
                                 <div class="agent-donate-icon"><i class="fas fa-hand-holding-dollar"></i></div>
                                 <h5>تبرع مالي</h5>
                                 <p>تسليم مبلغ التبرع نقداً في يدك — يصل إليك مندوب مؤسسة نور البخاري بموعد يناسبك.</p>
-                                <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="btn btn-luxury w-100">
+                                <a href="https://wa.me/{{ $settings['whatsapp_number'] }}" target="_blank" rel="noopener" class="btn btn-luxury w-100">
                                     <i class="fab fa-whatsapp"></i> طلب زيارة مندوب
                                 </a>
                             </div>
@@ -1529,7 +1430,7 @@
                     </div>
                     <h5 class="fw-bold mb-2">قريباً بإذن الله</h5>
                     <p class="text-muted mb-4">نعمل حالياً على تجهيز وسائل تبرع مخصصة للمتبرعين من خارج مصر. لحين إتاحتها، يمكنكم التواصل معنا مباشرة وسنساعدكم في إتمام تبرعكم.</p>
-                    <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="btn btn-luxury">
+                    <a href="https://wa.me/{{ $settings['whatsapp_number'] }}" target="_blank" rel="noopener" class="btn btn-luxury">
                         <i class="fab fa-whatsapp"></i> تواصل معنا عبر واتساب
                     </a>
                 </div>
@@ -1541,9 +1442,7 @@
         <div class="pay-note mx-auto">
             <p>
                 <strong>تأكد من تحويل المبلغ إلى الحساب الصحيح.</strong><br>
-                بعد التحويل، يرجى إرسال
-                <a href="https://wa.me/201055201766" target="_blank" rel="noopener">إيصال التحويل</a>
-                للتأكيد.
+                {{ $settings['donation_notice'] }}
             </p>
             <div class="pay-note-icon">
                 <span class="fa-stack">
@@ -1600,13 +1499,16 @@
         <!-- توثيق مرئي -->
         <h3 class="text-center mb-4">توثيق ميداني للعمليات الإغاثية</h3>
         <div class="row g-3">
-            @php $docs = [['تجهيز القافلة',15],['التحميل والإعداد',16],['التوزيع الميداني',17],['وصول المساعدة',18]]; @endphp
-            @foreach($docs as $d)
+            @php
+                $docs = [['تجهيز القافلة',15],['التحميل والإعداد',16],['التوزيع الميداني',17],['وصول المساعدة',18]];
+                $documentationImages = $images->get('documentation', collect())->values();
+            @endphp
+            @foreach($documentationImages as $documentationImage)
             <div class="col-md-6 col-lg-3">
                 <div class="doc-tile">
-                    <img src="{{ asset('assets/images/clinic/'.$d[1].'.JPG') }}" alt="{{ $d[0] }}">
+                    <img src="{{ Storage::url($documentationImage->path) }}" alt="{{ $documentationImage->alt_text }}">
                     <div class="doc-overlay">
-                        <h5><i class="fas fa-circle-check me-2"></i> {{ $d[0] }}</h5>
+                        <h5><i class="fas fa-circle-check me-2"></i> {{ $documentationImage->title }}</h5>
                     </div>
                 </div>
             </div>
@@ -1614,7 +1516,7 @@
         </div>
 
         <div class="text-center mt-5">
-            <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="btn btn-luxury">
+            <a href="https://wa.me/{{ $settings['whatsapp_number'] }}" target="_blank" rel="noopener" class="btn btn-luxury">
                 <i class="fab fa-whatsapp"></i>
                 اطلب تقرير التوثيق التفصيلي
             </a>
@@ -1631,13 +1533,13 @@
             <p class="fs-5 mx-auto text-muted" style="max-width: 720px;">توثيق ميداني لجهود فريقنا في إيصال المساعدات وإغاثة المحتاجين.</p>
         </div>
         <div class="row g-3">
-            @for($i=11; $i<=30; $i++)
+            @foreach($images->get('gallery', collect()) as $image)
             <div class="col-6 col-md-4 col-lg-3">
                 <div class="gallery-item">
-                    <img src="{{ asset('assets/images/clinic/'.$i.'.JPG') }}" alt="نور البخاري - توثيق ميداني">
+                    <img src="{{ Storage::url($image->path) }}" alt="{{ $image->alt_text ?: $image->title ?: $settings['site_name'] }}">
                 </div>
             </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 </section>
@@ -1654,7 +1556,7 @@
                         <i class="fas fa-hand-holding-heart"></i>
                         تبرع الآن
                     </a>
-                    <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="btn-luxury-outline">
+                    <a href="https://wa.me/{{ $settings['whatsapp_number'] }}" target="_blank" rel="noopener" class="btn-luxury-outline">
                         <i class="fab fa-whatsapp"></i>
                         تواصل عبر واتساب
                     </a>
@@ -1669,7 +1571,7 @@
     <a href="#donations" class="floating-btn donate" aria-label="تبرع الآن">
         <span class="donate-text">تبرع الآن</span>
     </a>
-    <a href="https://wa.me/201055201766" target="_blank" rel="noopener" class="floating-btn whatsapp" aria-label="واتساب">
+    <a href="https://wa.me/{{ $settings['whatsapp_number'] }}" target="_blank" rel="noopener" class="floating-btn whatsapp" aria-label="واتساب">
         <i class="fab fa-whatsapp"></i>
         <span class="label">تواصل واتساب</span>
     </a>
